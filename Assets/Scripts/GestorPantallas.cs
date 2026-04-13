@@ -1,34 +1,16 @@
 using UnityEngine;
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
 using TMPro;
-=======
-=======
->>>>>>> 95dac050e8fc6ffc13fbd20b57392a5f49844870
->>>>>>> Stashed changes
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro; // Necesario para leer los InputFields de TextMeshPro
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
->>>>>>> 95dac050e8fc6ffc13fbd20b57392a5f49844870
-=======
->>>>>>> 95dac050e8fc6ffc13fbd20b57392a5f49844870
->>>>>>> Stashed changes
 
 public class GestorPantallas : MonoBehaviour
 {
     [Header("Conecta tus pantallas aquí")]
     public GameObject pantallaInicioSesion;
     public GameObject pantallaRegistro;
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     public GameObject pantallaMenuPrincipal; // NUEVO: El menú
     public GameObject pantallaHistorial;     // NUEVO: El historial
 
@@ -43,10 +25,6 @@ public class GestorPantallas : MonoBehaviour
     public TMP_Text txtTotalTorres;
 
     // --- FUNCIONES DE AUTENTICACIÓN ---
-=======
-=======
->>>>>>> 95dac050e8fc6ffc13fbd20b57392a5f49844870
->>>>>>> Stashed changes
     public GameObject pantallaMenu;
 
     [Header("Campos de Texto (Inputs)")]
@@ -58,13 +36,6 @@ public class GestorPantallas : MonoBehaviour
     [Header("Configuración AWS")]
     public string apiURL = "https://68l3t5abk0.execute-api.us-east-1.amazonaws.com/default/Lambda_Unuty_user";
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
->>>>>>> 95dac050e8fc6ffc13fbd20b57392a5f49844870
-=======
->>>>>>> 95dac050e8fc6ffc13fbd20b57392a5f49844870
->>>>>>> Stashed changes
 
     public void IrARegistro()
     {
@@ -80,10 +51,6 @@ public class GestorPantallas : MonoBehaviour
         Debug.Log("Cambiando a pantalla de Inicio de Sesión");
     }
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
     // --- NUEVAS FUNCIONES DE NAVEGACIÓN ---
 
     // Esta función nos sirve para entrar al menú tras el Login, o volver desde el Historial
@@ -150,10 +117,6 @@ public class GestorPantallas : MonoBehaviour
         txtDanoInfligido.text = "42,850";
         txtTotalTorres.text = "128";
     }
-=======
-=======
->>>>>>> 95dac050e8fc6ffc13fbd20b57392a5f49844870
->>>>>>> Stashed changes
 
     // Se llama desde el botón "Iniciar Sesión"
     public void ClickLogin()
@@ -215,11 +178,4 @@ public class GestorPantallas : MonoBehaviour
             }
         }
     }
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
->>>>>>> 95dac050e8fc6ffc13fbd20b57392a5f49844870
-=======
->>>>>>> 95dac050e8fc6ffc13fbd20b57392a5f49844870
->>>>>>> Stashed changes
 }
