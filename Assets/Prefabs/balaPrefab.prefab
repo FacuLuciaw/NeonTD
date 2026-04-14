@@ -105,5 +105,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LogicaBala
   objetivo: {fileID: 0}
-  velocidad: 200
+  velocidad: 500
   compensacionRotacion: -90

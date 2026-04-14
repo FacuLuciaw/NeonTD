@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "NeonTD-DaniShiet.slnx"
+    "dotnet.defaultSolution": "NeonTD.slnx"
 }
