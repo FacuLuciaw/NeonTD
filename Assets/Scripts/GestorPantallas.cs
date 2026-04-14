@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using System.Collections;
-using TMPro; // Necesario para leer los InputFields de TextMeshPro
+using TMPro;
 
 public class GestorPantallas : MonoBehaviour
 {
@@ -10,6 +10,8 @@ public class GestorPantallas : MonoBehaviour
     public GameObject pantallaInicioSesion;
     public GameObject pantallaRegistro;
     public GameObject pantallaMenu;
+    public GameObject pantallaHistorial;
+    public GameObject pantallaEstadisticas;
 
     [Header("Campos de Texto (Inputs)")]
     public TMP_InputField userLogin;
@@ -17,32 +19,87 @@ public class GestorPantallas : MonoBehaviour
     public TMP_InputField userRegister;
     public TMP_InputField passRegister;
 
+    [Header("Configuración del Historial")]
+    public GameObject prefabTarjeta;
+    public Transform contenedorContent;
+
+    [Header("Textos de Estadísticas")]
+    public TMP_Text txtDanoRecibido;
+    public TMP_Text txtDanoInfligido;
+    public TMP_Text txtTotalTorres;
+
     [Header("Configuración AWS")]
     public string apiURL = "https://68l3t5abk0.execute-api.us-east-1.amazonaws.com/default/Lambda_Unuty_user";
 
+    // --- NAVEGACIÓN BÁSICA ---
 
     public void IrARegistro()
     {
-        pantallaInicioSesion.SetActive(false);
+        DesactivarTodasLasPantallas();
         pantallaRegistro.SetActive(true);
-        Debug.Log("Cambiando a pantalla de Registro");
     }
 
     public void IrAInicioSesion()
     {
-        pantallaRegistro.SetActive(false);
+        DesactivarTodasLasPantallas();
         pantallaInicioSesion.SetActive(true);
-        Debug.Log("Cambiando a pantalla de Inicio de Sesión");
     }
 
+    public void IrAMenuPrincipal()
+    {
+        DesactivarTodasLasPantallas();
+        pantallaMenu.SetActive(true);
+    }
 
-    // Se llama desde el botón "Iniciar Sesión"
+    public void AbrirHistorial()
+    {
+        DesactivarTodasLasPantallas();
+        pantallaHistorial.SetActive(true);
+        GenerarDatosDePrueba(); // Generamos las tarjetas al entrar
+    }
+
+    public void AbrirEstadisticas()
+    {
+        DesactivarTodasLasPantallas();
+        pantallaEstadisticas.SetActive(true);
+
+        // Datos de prueba para estadísticas
+        txtDanoRecibido.text = "15,400";
+        txtDanoInfligido.text = "42,850";
+        txtTotalTorres.text = "128";
+    }
+
+    // Esta es la función que te faltaba para que no de error
+    private void DesactivarTodasLasPantallas()
+    {
+        pantallaInicioSesion.SetActive(false);
+        pantallaRegistro.SetActive(false);
+        pantallaMenu.SetActive(false);
+        pantallaHistorial.SetActive(false);
+        pantallaEstadisticas.SetActive(false);
+    }
+
+    // --- LÓGICA DE AWS ---
+
+    public void ClickLogin()
+    {
+        // Borra la línea de StartCoroutine(EnviarPeticion...);
+        IrAMenuPrincipal(); // Salto directo
+    }
+
+    public void ClickRegistro()
+    {
+        // Borra la línea de StartCoroutine(EnviarPeticion...);
+        IrAInicioSesion(); // Salto directo
+    }
+
+    /*
+    
     public void ClickLogin()
     {
         StartCoroutine(EnviarPeticion("login", userLogin.text, passLogin.text));
     }
 
-    // Se llama desde el botón "Crear"
     public void ClickRegistro()
     {
         StartCoroutine(EnviarPeticion("registro", userRegister.text, passRegister.text));
@@ -50,7 +107,6 @@ public class GestorPantallas : MonoBehaviour
 
     IEnumerator EnviarPeticion(string accion, string user, string pass)
     {
-        // Creamos el Json de datos para enviar
         string json = "{\"nickname\":\"" + user + "\", \"contrasena\":\"" + pass + "\", \"accion\":\"" + accion + "\"}";
 
         using (UnityWebRequest request = new UnityWebRequest(apiURL, "POST"))
@@ -60,40 +116,57 @@ public class GestorPantallas : MonoBehaviour
             request.downloadHandler = new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
 
-            Debug.Log($"Enviando {accion} para el usuario: {user}");
-
             yield return request.SendWebRequest();
 
             if (request.result == UnityWebRequest.Result.Success)
             {
-                Debug.Log("Respuesta de AWS: " + request.downloadHandler.text);
-                
                 if (accion == "registro")
                 {
-                    // Si el registro fue bien, lo mandamos al login para que entre
                     IrAInicioSesion();
-                    //FALTA: Crear algo que me permita decirle que su cuenta fue creada con exito
                 }
                 else
                 {
-                    // Login exitoso
-                    Debug.Log("¡Acceso concedido! Cargando juego...");
-                    pantallaInicioSesion.SetActive(false);
-                    pantallaMenu.SetActive(true);
-                    
+                    IrAMenuPrincipal();
                 }
             }
             else
             {
-                if (request.responseCode == 404) 
-                    Debug.LogWarning("El usuario no existe. Pulsa en Registrarse.");
-                else if (request.responseCode == 409) 
-                    Debug.LogError("El nombre ya está pillado. Elige otro.");
-                else if (request.responseCode == 401)
-                    Debug.LogError("Contraseña incorrecta.");
-                else
-                    Debug.LogError("Error de conexión: " + request.error);
+                Debug.LogError("Error de AWS: " + request.error);
             }
         }
     }
+    */
+
+    // --- LÓGICA DE HISTORIAL (TARJETAS) ---
+
+    private void GenerarDatosDePrueba()
+    {
+        // 1. Limpiamos la caja por si ya habíamos entrado antes
+        foreach (Transform hijo in contenedorContent)
+        {
+            Destroy(hijo.gameObject);
+        }
+
+        // 2. Creamos 5 partidas falsas
+        for (int i = 0; i < 5; i++)
+        {
+            // 1. Clonar (el 'false' mantiene las proporciones del UI)
+            GameObject nuevaTarjeta = Instantiate(prefabTarjeta, contenedorContent, false);
+
+            // 2. FORZAR TAMAÑO Y POSICIÓN (¡Esto pintará la tarjeta!)
+            nuevaTarjeta.transform.localScale = Vector3.one; // Fuerza la escala a 1,1,1
+            nuevaTarjeta.transform.localPosition = new Vector3(nuevaTarjeta.transform.localPosition.x, nuevaTarjeta.transform.localPosition.y, 0f); // Fuerza la Z a 0
+
+            // 3. Obtenemos su cerebro
+            TarjetaPartida scriptTarjeta = nuevaTarjeta.GetComponent<TarjetaPartida>();
+
+            // 4. Inventamos datos y los mandamos
+            string resultadoFalso = (Random.value > 0.5f) ? "Victoria" : "Derrota";
+            string fechaFalsa = "13/04/2026";
+            string duracionFalsa = Random.Range(5, 25).ToString() + " min";
+
+            scriptTarjeta.ConfigurarTarjeta(duracionFalsa, fechaFalsa, resultadoFalso);
+        }
+    }
+
 }
