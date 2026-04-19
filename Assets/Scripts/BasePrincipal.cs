@@ -10,6 +10,9 @@ public class BasePrincipal : MonoBehaviour
     [Header("Interfaz (UI)")]
     public Image barraDeVida; 
 
+    [Header("Conexión al Árbitro")]
+    public AdministradorNivel adminNivel; // <- ¡NUEVO! Conexión al árbitro
+
     void Start()
     {
         vidaActual = vidaMaxima;
@@ -25,6 +28,12 @@ public class BasePrincipal : MonoBehaviour
         if (vidaActual <= 0)
         {
             Debug.Log("¡GAME OVER!");
+            
+            // <- ¡NUEVO! Le avisamos al administrador para que salte la derrota
+            if (adminNivel != null)
+            {
+                adminNivel.MostrarDerrota(); 
+            }
         }
     }
 

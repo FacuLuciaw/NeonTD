@@ -25,7 +25,7 @@ public class CarruselDificultad : MonoBehaviour
     // Variable para saber en qué mapa estamos (0 es el primero)
     private int indiceActual = 0;
 
-    void Start()
+void Start()
     {
         // Al arrancar, mostramos el primer mapa de la lista
         if (mapasDisponibles.Length > 0)

@@ -77,9 +77,9 @@ public class LogicaEnemigo : MonoBehaviour
         }
     }
 
-    void Morir()
+void Morir()
     {
-        // Avisamos al banco de que sume el dinero
+
         if(GestorEconomia.instancia != null)
         {
             GestorEconomia.instancia.SumarOro(oroAlMorir);

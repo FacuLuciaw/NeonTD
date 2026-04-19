@@ -83,6 +83,26 @@ public void IrAInicioSesion()
         pantallaSeleccionMapa.SetActive(false);
     }
 
+    void Start()
+    {
+        // El menú arranca y comprueba si hay una nota secreta de volver a jugar
+        if (PlayerPrefs.GetInt("AbrirCarrusel", 0) == 1)
+        {
+            // 1. Borramos la nota
+            PlayerPrefs.SetInt("AbrirCarrusel", 0);
+
+            // 2. Apagamos todo y encendemos el Carrusel
+            DesactivarTodasLasPantallas();
+            pantallaSeleccionMapa.SetActive(true); 
+        }
+        else
+        {
+            // Si NO hay nota, abrimos la pantalla normal del menú
+            DesactivarTodasLasPantallas();
+            pantallaInicioSesion.SetActive(true); // O la pantalla inicial que uses
+        }
+    }
+
     // --- LÓGICA DE AWS ---
 
     public void ClickLogin()
