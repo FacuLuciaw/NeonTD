@@ -13,6 +13,11 @@ public class LogicaBala : MonoBehaviour {
     [Header("Estadísticas del Proyectil")]
     public float dano = 1f; 
 
+    [Header("Efecto Daño Continuo")]
+    public bool aplicaDañoContinuo = false; // Casilla para activar si es bala de Torre 4
+    public float danoPorSegundo = 2f;
+    public float duracionEfecto = 10f;
+
     void Update() {
         if (objetivo == null) {
             Destroy(gameObject);
@@ -35,6 +40,11 @@ public class LogicaBala : MonoBehaviour {
                 // ✅ ¡PARTE NUEVA 2: USAR LA VARIABLE!
                 // Cambiamos el 1f fijo por el valor que le pongas a la variable "dano"
                 scriptEnemigo.RecibirDaño(dano); 
+
+                // ✅ ¡PARTE NUEVA 3: DAÑO CONTINUO DE LA TORRE 4!
+                if (aplicaDañoContinuo) {
+                    scriptEnemigo.AplicarDañoContinuo(danoPorSegundo, duracionEfecto);
+                }
             }
 
             Destroy(gameObject);

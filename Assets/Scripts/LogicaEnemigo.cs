@@ -122,4 +122,29 @@ void Morir()
             velocidad = velocidadOriginal;
         }
     }
+
+    // --- SISTEMA DE DAÑO CONTINUO (TORRE 4) ---
+    public void AplicarDañoContinuo(float dps, float duracion)
+    {
+        // Iniciamos el reloj de arena del daño
+        StartCoroutine(RutinaDañoContinuo(dps, duracion));
+    }
+
+    private System.Collections.IEnumerator RutinaDañoContinuo(float dps, float duracion)
+    {
+        float tiempoPasado = 0f;
+
+        // Mientras no se acabe el tiempo...
+        while (tiempoPasado < duracion)
+        {
+            // Esperamos 1 segundo exacto
+            yield return new WaitForSeconds(1f); 
+
+            // Le aplicamos el daño usando tu función que ya actualiza la barra y comprueba si muere
+            RecibirDaño(dps);
+            
+            // Sumamos 1 segundo al contador
+            tiempoPasado += 1f;
+        }
+    }
 }
