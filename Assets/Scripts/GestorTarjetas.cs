@@ -18,7 +18,7 @@ public class GestorHistorial : MonoBehaviour
         pantallaHistorial.SetActive(true);
 
         // Generar datos
-        GenerarDatosDePrueba();
+       // GenerarDatosDePrueba();
     }
 
     // 2. FUNCIÓN PARA VOLVER AL MENÚ
@@ -29,7 +29,7 @@ public class GestorHistorial : MonoBehaviour
     }
 
     // 3. LA MAGIA: SIMULAR LA BASE DE DATOS
-    private void GenerarDatosDePrueba()
+   /* private void GenerarDatosDePrueba()
     {
         // Primero, borramos las tarjetas viejas (por si entramos y salimos varias veces)
         foreach (Transform hijo in contenedorContent)
@@ -52,7 +52,7 @@ public class GestorHistorial : MonoBehaviour
             string duracionFalsa = Random.Range(5, 25).ToString() + " min";
 
             // ¡Mandamos los datos a la tarjeta!
-            scriptTarjeta.ConfigurarTarjeta(duracionFalsa, fechaFalsa, resultadoFalso);
+            scriptTarjeta.ConfigurarTarjeta(duracionFalsa, fechaFalsa, resultadoFalso,"dificil", "10","4");
         }
-    }
+    }*/
 }

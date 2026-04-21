@@ -3,32 +3,31 @@ using TMPro;
 
 public class TarjetaPartida : MonoBehaviour
 {
-    [Header("Textos de la UI")]
-    public TMP_Text txtOro;       
-    public TMP_Text txtFecha;
-    public TMP_Text txtResultado;
+    [Header("Referencias de Texto")]
+    public TMP_Text textResultado;
+    public TMP_Text textFecha;
+    public TMP_Text textDificultad;
+    public TMP_Text textOroObtenido;
+    public TMP_Text textEnemigos;
+    public TMP_Text textTorres;
 
-    public void ConfigurarTarjeta(string oro, string fecha, string resultado)
+    // Esta es la función que llama el GestorPantallas pasando todos los datos
+    public void ConfigurarTarjeta(string oro, string fecha, string resultado, string dificultad, string enemigos, string torres)
     {
-        // 1. Asignamos los textos limpios (sin "Fecha:" ni nada extra)
-        txtOro.text = oro;
-        txtFecha.text = fecha;
-        txtResultado.text = resultado;
+        // Asignamos cada string al componente de texto correspondiente
+        if (textOroObtenido != null) textOroObtenido.text = oro;
+        if (textFecha != null) textFecha.text = fecha;
+        if (textResultado != null) textResultado.text = resultado.ToUpper();
+        if (textDificultad != null) textDificultad.text = dificultad;
+        if (textEnemigos != null) textEnemigos.text = enemigos;
+        if (textTorres != null) textTorres.text = torres;
 
-        // 2. Aplicamos los colores NEÓN
-        if(resultado == "Victoria")
-        {
-            // Verde Neón (#39FF14)
-            Color colorVerdeNeon;
-            ColorUtility.TryParseHtmlString("#39FF14", out colorVerdeNeon);
-            txtResultado.color = colorVerdeNeon;
-        }
+        // Extra: Cambio de color automático según el resultado
+        if (resultado.ToLower() == "victoria")
+            textResultado.color = Color.green;
+        else if (resultado.ToLower() == "derrota")
+            textResultado.color = Color.red;
         else
-        {
-            // Rojo Neón (#FF3131)
-            Color colorRojoNeon;
-            ColorUtility.TryParseHtmlString("#FF3131", out colorRojoNeon);
-            txtResultado.color = colorRojoNeon;
-        }
+            textResultado.color = Color.gray; // Para casos como "Rendición"
     }
 }

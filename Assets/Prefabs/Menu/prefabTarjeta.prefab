@@ -467,9 +467,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41dbcf1d9a91446f8bf01c1f1bf9097d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TarjetaPartida
-  txtOro: {fileID: 1524424774155233887}
-  txtFecha: {fileID: 7394932164254262145}
-  txtResultado: {fileID: 4971393609203407206}
+  textResultado: {fileID: 4971393609203407206}
+  textFecha: {fileID: 7394932164254262145}
+  textDificultad: {fileID: 3695641501746351935}
+  textOroObtenido: {fileID: 1524424774155233887}
+  textEnemigos: {fileID: 3875418746863462510}
+  textTorres: {fileID: 7617860695117775374}
 --- !u!114 &-8362770548000914967
 MonoBehaviour:
   m_ObjectHideFlags: 0
