@@ -1589,7 +1589,7 @@ GameObject:
   - component: {fileID: 618343891501688883}
   - component: {fileID: 453510123916851566}
   m_Layer: 5
-  m_Name: contenedorFormulario
+  m_Name: Formulario
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

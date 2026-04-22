@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 2616578411084548867}
   - component: {fileID: 6438003811800627444}
   m_Layer: 5
-  m_Name: contStat
+  m_Name: itemEstadistica
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
