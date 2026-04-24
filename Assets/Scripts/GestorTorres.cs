@@ -26,6 +26,9 @@ public class GestorTorres : MonoBehaviour
     public float offsetX = 50f;      
     public float offsetY = 50f;      
 
+    [Header("Conexión al Registro de Partida")]
+    public PartidaJSON datosPartida; // <- Para registrar las torres construidas
+
     private DatosTorre torreAConstruir; // La torre que hemos elegido ahora mismo
     private GameObject previewActual; 
     private bool enModoConstruccion = false;
@@ -116,6 +119,23 @@ public class GestorTorres : MonoBehaviour
             // Cobramos y construimos
             GestorEconomia.instancia.RestarOro(torreAConstruir.costeActual);
             Instantiate(torreAConstruir.prefabReal, posicion, Quaternion.identity);
+            
+            // Registramos la torre construida en los datos de la partida
+            if (datosPartida != null)
+            {
+                datosPartida.RegistrarTorre(torreAConstruir.nombre);
+                Debug.Log("✓ Torre registrada: " + torreAConstruir.nombre + " | Total torres: " + datosPartida.torres.Count);
+                
+                // Mostrar el estado actual de las torres
+                foreach (DetalleTorre t in datosPartida.torres)
+                {
+                    Debug.Log("  └─ " + t.nombre + " x" + t.cantidad);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("⚠ datosPartida no está asignado en GestorTorres");
+            }
             
             // Subimos el precio SOLO de la torre que acabamos de poner
             torreAConstruir.costeActual = Mathf.RoundToInt(torreAConstruir.costeActual * torreAConstruir.multiplicadorCoste);

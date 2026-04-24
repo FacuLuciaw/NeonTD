@@ -7,11 +7,14 @@ public class BasePrincipal : MonoBehaviour
     public float vidaMaxima = 100f;
     private float vidaActual;
 
+    private float danoTotalRecibido = 0f;
+
     [Header("Interfaz (UI)")]
     public Image barraDeVida; 
 
     [Header("Conexión al Árbitro")]
-    public AdministradorNivel adminNivel; // <- ¡NUEVO! Conexión al árbitro
+    public AdministradorNivel adminNivel; // <- ¡NUEVO! Conexión al árbitro 
+
 
     void Start()
     {
@@ -21,7 +24,9 @@ public class BasePrincipal : MonoBehaviour
 
     public void RecibirDano(float cantidad)
     {
+        danoTotalRecibido += cantidad;
         vidaActual -= cantidad;
+    
         vidaActual = Mathf.Clamp(vidaActual, 0, vidaMaxima); 
         ActualizarBarraVida();
 
@@ -43,5 +48,10 @@ public class BasePrincipal : MonoBehaviour
         {
             barraDeVida.fillAmount = vidaActual / vidaMaxima;
         }
+    }
+
+    public float ObtenerDanoTotalRecibido()
+    {
+        return danoTotalRecibido;
     }
 }
