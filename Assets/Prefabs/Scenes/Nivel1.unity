@@ -1665,6 +1665,60 @@ RectTransform:
   m_AnchoredPosition: {x: -1042.4971, y: -605.9357}
   m_SizeDelta: {x: 373.0058, y: 158.1285}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &562988486
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 562988488}
+  - component: {fileID: 562988487}
+  m_Layer: 0
+  m_Name: GestorDatosPartida
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &562988487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562988486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e365a34f6487c5147a3915876b00b21a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GestorDatosPartida
+  datosPartida:
+    id_user: 0
+    estado: 
+    nivel: 
+    dano_total_infligido: 0
+    dano_total_recibido: 0
+    oro_ganado: 0
+    oro_gastado: 0
+    torres: []
+    enemigos: []
+--- !u!4 &562988488
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562988486}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1118.7612, y: 401.37787, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &569404840
 GameObject:
   m_ObjectHideFlags: 0
@@ -6265,16 +6319,6 @@ MonoBehaviour:
   "tama\xF1oCasilla": 100
   offsetX: 50
   offsetY: 50.2
-  datosPartida:
-    id_user: 0
-    estado: 
-    nivel: 
-    dano_total_infligido: 0
-    dano_total_recibido: 0
-    oro_ganado: 0
-    oro_gastado: 0
-    torres: []
-    enemigos: []
   botonVenderUI: {fileID: 1237609654}
   textoPrecioVenta: {fileID: 1618658891}
   offsetBotonVenta: {x: 0, y: -100, z: 0}
@@ -6306,8 +6350,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bdda1c91d284824ca34e6e76d4198fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GeneradorEnemigos
-  enemigoNormalPrefab: {fileID: 2180232327059474889, guid: bc1bde4877da6fd44b7d4e4b1e48f3c1, type: 3}
-  enemigoFuertePrefab: {fileID: 2180232327059474889, guid: bc1bde4877da6fd44b7d4e4b1e48f3c1, type: 3}
+  enemigoNormalPrefab: {fileID: 2180232327059474889, guid: 1afbe424d35e84248821968e9afecbb5, type: 3}
+  enemigoFuertePrefab: {fileID: 2180232327059474889, guid: 1afbe424d35e84248821968e9afecbb5, type: 3}
   puntoDeSalida: {fileID: 1814834495}
   puntosCamino:
   - {fileID: 1814834495}
@@ -6468,3 +6512,4 @@ SceneRoots:
   - {fileID: 1062398751}
   - {fileID: 221898426}
   - {fileID: 1365287730}
+  - {fileID: 562988488}

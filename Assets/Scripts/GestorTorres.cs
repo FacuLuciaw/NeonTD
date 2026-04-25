@@ -24,9 +24,6 @@ public class GestorTorres : MonoBehaviour
     public float offsetX = 50f;      
     public float offsetY = 50f;      
 
-    [Header("Conexión al Registro de Partida")]
-    public PartidaJSON datosPartida; 
-
     [Header("Interfaz de Venta")]
     public GameObject botonVenderUI; 
     public TextMeshProUGUI textoPrecioVenta; 
@@ -164,9 +161,16 @@ public class GestorTorres : MonoBehaviour
                 scriptSeleccion.ConfigurarDatosDeCompra(torreAConstruir.costeActual, indiceDeTorreAConstruir);
             }
 
-            if (datosPartida != null)
+            if (GestorDatosPartida.instancia != null)
             {
-                datosPartida.RegistrarTorre(torreAConstruir.nombre);
+                GestorDatosPartida.instancia.RegistrarTorre(torreAConstruir.nombre);
+                Debug.Log("✓ Torre registrada: " + torreAConstruir.nombre + " | Total torres: " + GestorDatosPartida.instancia.datosPartida.torres.Count);
+                
+                // Mostrar el estado actual de las torres
+                foreach (DetalleTorre t in GestorDatosPartida.instancia.datosPartida.torres)
+                {
+                    Debug.Log("  └─ " + t.nombre + " x" + t.cantidad);
+                }
             }
             
             torreAConstruir.costeActual = Mathf.RoundToInt(torreAConstruir.costeActual * torreAConstruir.multiplicadorCoste);
@@ -210,8 +214,22 @@ public class GestorTorres : MonoBehaviour
         // 2. Le aplicamos el porcentaje de penalización por vender
         int valorReembolso = Mathf.RoundToInt(valorUltimaTorre * (porcentajeReembolso / 100f));
 
-        // 3. Devolvemos el dinero al jugador
-        GestorEconomia.instancia.SumarOro(valorReembolso);
+        // 3. Devolvemos el dinero al jugador (sin contar como ganancia)
+        GestorEconomia.instancia.ReembolsoVenta(valorReembolso);
+
+        // Desvinculamos la torre de los datos de la partida
+        if (GestorDatosPartida.instancia != null)
+        {
+            GestorDatosPartida.instancia.DesvincularTorre(datos.nombre);
+            Debug.Log("✗ Torre vendida: " + datos.nombre + " | Reembolso: +" + valorReembolso + " Oro");
+            Debug.Log("💰 Oro Gastado actualizado de forma automática");
+            
+            // Mostrar el estado actual de las torres
+            foreach (DetalleTorre t in GestorDatosPartida.instancia.datosPartida.torres)
+            {
+                Debug.Log("  └─ " + t.nombre + " x" + t.cantidad);
+            }
+        }
 
         // 4. Bajamos el precio de la tienda al escalón anterior (sin importar el porcentaje de reembolso)
         datos.costeActual = valorUltimaTorre;
@@ -219,7 +237,7 @@ public class GestorTorres : MonoBehaviour
         ActualizarTodosLosBotones();
 
         torre.Deseleccionar(); 
-        SeleccionTorre.torreSeleccionadaActual = null; // Evitamos el NullReferenceException
+        SeleccionTorre.torreSeleccionadaActual = null;
         Destroy(torre.gameObject); 
     }
 }

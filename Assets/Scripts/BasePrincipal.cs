@@ -13,7 +13,7 @@ public class BasePrincipal : MonoBehaviour
     public Image barraDeVida; 
 
     [Header("Conexión al Árbitro")]
-    public AdministradorNivel adminNivel; // <- ¡NUEVO! Conexión al árbitro 
+    public AdministradorNivel adminNivel; // <- ¡NUEVO! Conexión al árbitro
 
 
     void Start()
@@ -29,6 +29,12 @@ public class BasePrincipal : MonoBehaviour
     
         vidaActual = Mathf.Clamp(vidaActual, 0, vidaMaxima); 
         ActualizarBarraVida();
+
+        // Registramos el daño en los datos de la partida
+        if (GestorDatosPartida.instancia != null)
+        {
+            GestorDatosPartida.instancia.RegistrarDanoRecibido(cantidad);
+        }
 
         if (vidaActual <= 0)
         {

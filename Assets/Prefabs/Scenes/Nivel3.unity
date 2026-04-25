@@ -6058,7 +6058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25a6ce3adfbe3144a9fbd700dc39bca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasePrincipal
-  vidaMaxima: 100
+  vidaMaxima: 1000
   barraDeVida: {fileID: 536652375}
   adminNivel: {fileID: 1309895164}
 --- !u!1 &1391725821
@@ -6148,6 +6148,10 @@ MonoBehaviour:
   "tama\xF1oCasilla": 100
   offsetX: 50
   offsetY: 50.2
+  botonVenderUI: {fileID: 0}
+  textoPrecioVenta: {fileID: 0}
+  offsetBotonVenta: {x: 0, y: -1.5, z: 0}
+  porcentajeReembolso: 100
 --- !u!4 &1391725825
 Transform:
   m_ObjectHideFlags: 0
@@ -9133,6 +9137,10 @@ MonoBehaviour:
   "tama\xF1oCasilla": 100
   offsetX: 50
   offsetY: 50.2
+  botonVenderUI: {fileID: 0}
+  textoPrecioVenta: {fileID: 0}
+  offsetBotonVenta: {x: 0, y: -1.5, z: 0}
+  porcentajeReembolso: 100
 --- !u!4 &2103929298
 Transform:
   m_ObjectHideFlags: 0

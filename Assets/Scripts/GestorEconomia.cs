@@ -29,6 +29,13 @@ public class GestorEconomia : MonoBehaviour
     public void SumarOro(int cantidad)
     {
         oroActual += cantidad;
+        
+        // Registramos el dinero ganado en la partida
+        if (GestorDatosPartida.instancia != null)
+        {
+            GestorDatosPartida.instancia.RegistrarOroGanado(cantidad);
+        }
+        
         ActualizarTextoUI();
     }
 
@@ -42,6 +49,27 @@ public class GestorEconomia : MonoBehaviour
     public void RestarOro(int coste)
     {
         oroActual -= coste;
+        
+        // Registramos el dinero gastado en la partida
+        if (GestorDatosPartida.instancia != null)
+        {
+            GestorDatosPartida.instancia.RegistrarOroGastado(coste);
+        }
+        
+        ActualizarTextoUI();
+    }
+
+    // Se usa cuando se vende una torre (reembolso, no ganancia)
+    public void ReembolsoVenta(int cantidad)
+    {
+        oroActual += cantidad;
+        
+        // NO registramos como oro_ganado, solo restamos del oro_gastado
+        if (GestorDatosPartida.instancia != null)
+        {
+            GestorDatosPartida.instancia.RestarOroGastado(cantidad);
+        }
+        
         ActualizarTextoUI();
     }
 

@@ -9199,6 +9199,10 @@ MonoBehaviour:
   "tama\xF1oCasilla": 100
   offsetX: 50
   offsetY: 50.2
+  botonVenderUI: {fileID: 0}
+  textoPrecioVenta: {fileID: 0}
+  offsetBotonVenta: {x: 0, y: -1.5, z: 0}
+  porcentajeReembolso: 100
 --- !u!4 &2103929298
 Transform:
   m_ObjectHideFlags: 0

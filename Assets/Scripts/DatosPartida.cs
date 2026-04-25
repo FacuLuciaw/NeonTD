@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class PartidaJSON
@@ -50,6 +51,61 @@ public class PartidaJSON
             // Si no existe, lo creamos
             enemigos.Add(new DetalleEnemigo { nombre = nombreEnemigo, cantidad = 1 });
         }
+    }
+
+    // Método para restar una torre (cuando se vende)
+    public void DesvincularTorre(string nombreTorre)
+    {
+        // Buscamos la torre con ese nombre
+        DetalleTorre torreExistente = torres.Find(t => t.nombre == nombreTorre);
+        
+        if (torreExistente != null)
+        {
+            // Si existe y hay más de 1, restamos 1
+            if (torreExistente.cantidad > 1)
+            {
+                torreExistente.cantidad--;
+            }
+            else
+            {
+                // Si solo hay 1, la eliminamos de la lista
+                torres.Remove(torreExistente);
+            }
+        }
+    }
+
+    // Métodos para rastrear dinero ganado y gastado
+    public void RegistrarOroGanado(int cantidad)
+    {
+        oro_ganado += cantidad;
+       
+    }
+
+    public void RegistrarOroGastado(int cantidad)
+    {
+        oro_gastado += cantidad;
+       
+    }
+
+    // Método para restar oro gastado (cuando se vende una torre)
+    public void RestarOroGastado(int cantidad)
+    {
+        oro_gastado -= cantidad;
+        // Aseguramos que no sea negativo
+        if (oro_gastado < 0) oro_gastado = 0;
+    }
+
+    // Método para registrar daño recibido por la base
+    public void RegistrarDanoRecibido(float cantidad)
+    {
+        dano_total_recibido += (int)cantidad;
+       
+    }
+
+    // Método para establecer el nivel de dificultad
+    public void EstablecerNivel(string nombreNivel)
+    {
+        nivel = nombreNivel;
     }
 }
 

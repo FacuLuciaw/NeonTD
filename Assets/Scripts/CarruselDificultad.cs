@@ -10,6 +10,7 @@ public class NivelMapa
     public string nombreDificultad; // Ej: "Bosque - Fácil"
     public Sprite imagenDelMapa;    // La foto que se mostrará
     public string nombreEscenaUnity; // <- ¡NUEVO! El nombre exacto de la escena a cargar
+    
 }
 
 public class CarruselDificultad : MonoBehaviour
@@ -24,6 +25,7 @@ public class CarruselDificultad : MonoBehaviour
 
     // Variable para saber en qué mapa estamos (0 es el primero)
     private int indiceActual = 0;
+    private string dificultad;
 
 void Start()
     {
@@ -75,12 +77,30 @@ void Start()
     {
         // Obtenemos el nombre de la escena que configuraste en el Inspector para este mapa
         string escenaACargar = mapasDisponibles[indiceActual].nombreEscenaUnity;
+
+        dificultad = mapasDisponibles[indiceActual].nombreDificultad;
         
         Debug.Log("Cargando nivel: " + escenaACargar);
+        SceneManager.sceneLoaded += AlCargarEscena;
         
         // Viajamos a la escena
         SceneManager.LoadScene(escenaACargar);
+
     }
+
+    private void AlCargarEscena(Scene escena, LoadSceneMode modo) {
+
+     if (GestorDatosPartida.instancia != null){
+         GestorDatosPartida.instancia.EstablecerNivel(dificultad);
+         Debug.Log("✓ Dificultad registrada tras carga: " + dificultad);
+        } else{
+         Debug.LogError("✗ El Gestor sigue sin aparecer incluso tras cargar escena");
+        }
+
+     // 3. ¡MUY IMPORTANTE!: Nos desuscribimos para que no se repita esto cada vez que cambies de mapa
+     SceneManager.sceneLoaded -= AlCargarEscena;
+    }
+   
 
     // Función extra por si la necesitas en el futuro
     public int ObtenerNivelSeleccionado()
