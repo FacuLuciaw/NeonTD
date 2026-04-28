@@ -297,7 +297,7 @@ MonoBehaviour:
   vidaMax: 200
   barraDeVida: {fileID: 704051947671144105}
   danoABase: 125
-  oroAlMorir: 100
+  oroAlMorir: 45
   nombreEnemigo: Rosa Tier 2
 --- !u!50 &658251800166474911
 Rigidbody2D:

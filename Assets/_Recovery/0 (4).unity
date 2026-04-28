@@ -3236,7 +3236,7 @@ MonoBehaviour:
       cantidad: 8
       tiempoEntreEllos: 1.17
       tiempoEsperaDespues: 0
-    - nombreGrupo: RosaTier2
+    - nombreGrupo: RosasTier2
       prefabEnemigo: {fileID: 2180232327059474889, guid: 36ce8960ce9295d4e823d7d8554cdb54, type: 3}
       cantidad: 2
       tiempoEntreEllos: 1.1
@@ -3245,137 +3245,69 @@ MonoBehaviour:
     grupos:
     - nombreGrupo: RosasTier1
       prefabEnemigo: {fileID: 2180232327059474889, guid: 1afbe424d35e84248821968e9afecbb5, type: 3}
-      cantidad: 10
-      tiempoEntreEllos: 0.2
-      tiempoEsperaDespues: 1
+      cantidad: 3
+      tiempoEntreEllos: 1.5
+      tiempoEsperaDespues: 0
     - nombreGrupo: RosaTier2
       prefabEnemigo: {fileID: 2180232327059474889, guid: 36ce8960ce9295d4e823d7d8554cdb54, type: 3}
-      cantidad: 4
-      tiempoEntreEllos: 1
+      cantidad: 2
+      tiempoEntreEllos: 1.5
+      tiempoEsperaDespues: 0
+    - nombreGrupo: RosasTier1
+      prefabEnemigo: {fileID: 2180232327059474889, guid: 1afbe424d35e84248821968e9afecbb5, type: 3}
+      cantidad: 3
+      tiempoEntreEllos: 1.5
       tiempoEsperaDespues: 0
   - nombreRonda: Ronda 4
     grupos:
     - nombreGrupo: NaranjasTier1
       prefabEnemigo: {fileID: 2180232327059474889, guid: bbe72bc9023cbe0449ead4daa2ca8bab, type: 3}
       cantidad: 10
-      tiempoEntreEllos: 0.2
-      tiempoEsperaDespues: 0
-    - nombreGrupo: RosasTier1
-      prefabEnemigo: {fileID: 2180232327059474889, guid: 1afbe424d35e84248821968e9afecbb5, type: 3}
-      cantidad: 10
-      tiempoEntreEllos: 1.2
-      tiempoEsperaDespues: 0
-    - nombreGrupo: RosaTier2
-      prefabEnemigo: {fileID: 2180232327059474889, guid: 36ce8960ce9295d4e823d7d8554cdb54, type: 3}
-      cantidad: 2
       tiempoEntreEllos: 0.5
       tiempoEsperaDespues: 0
     - nombreGrupo: RosasTier1
       prefabEnemigo: {fileID: 2180232327059474889, guid: 1afbe424d35e84248821968e9afecbb5, type: 3}
-      cantidad: 10
-      tiempoEntreEllos: 1.2
+      cantidad: 5
+      tiempoEntreEllos: 1.5
+      tiempoEsperaDespues: 0
+    - nombreGrupo: RosaTier2
+      prefabEnemigo: {fileID: 2180232327059474889, guid: 36ce8960ce9295d4e823d7d8554cdb54, type: 3}
+      cantidad: 1
+      tiempoEntreEllos: 0.5
+      tiempoEsperaDespues: 0
+    - nombreGrupo: RosasTier1
+      prefabEnemigo: {fileID: 2180232327059474889, guid: 1afbe424d35e84248821968e9afecbb5, type: 3}
+      cantidad: 5
+      tiempoEntreEllos: 1.5
       tiempoEsperaDespues: 0
     - nombreGrupo: NaranjasTier1
       prefabEnemigo: {fileID: 2180232327059474889, guid: bbe72bc9023cbe0449ead4daa2ca8bab, type: 3}
       cantidad: 10
-      tiempoEntreEllos: 0.2
+      tiempoEntreEllos: 0.5
       tiempoEsperaDespues: 0
   - nombreRonda: Ronda 5
     grupos:
     - nombreGrupo: VerdeTier1
       prefabEnemigo: {fileID: 2180232327059474889, guid: 8c93cf7b40b95444590cfa87f96a38af, type: 3}
-      cantidad: 1
+      cantidad: 2
       tiempoEntreEllos: 0.5
-      tiempoEsperaDespues: 2
-    - nombreGrupo: VerdeTier1
-      prefabEnemigo: {fileID: 2180232327059474889, guid: 8c93cf7b40b95444590cfa87f96a38af, type: 3}
-      cantidad: 5
+      tiempoEsperaDespues: 0
+    - nombreGrupo: RosasTier2
+      prefabEnemigo: {fileID: 2180232327059474889, guid: 36ce8960ce9295d4e823d7d8554cdb54, type: 3}
+      cantidad: 3
       tiempoEntreEllos: 0.5
       tiempoEsperaDespues: 0
   - nombreRonda: Ronda 6
     grupos:
     - nombreGrupo: VerdeTier1
       prefabEnemigo: {fileID: 2180232327059474889, guid: 8c93cf7b40b95444590cfa87f96a38af, type: 3}
-      cantidad: 5
-      tiempoEntreEllos: 1
-      tiempoEsperaDespues: 0
-    - nombreGrupo: RosaTier2
-      prefabEnemigo: {fileID: 2180232327059474889, guid: 36ce8960ce9295d4e823d7d8554cdb54, type: 3}
-      cantidad: 10
+      cantidad: 2
       tiempoEntreEllos: 0.5
       tiempoEsperaDespues: 0
-  - nombreRonda: Ronda 7
-    grupos:
-    - nombreGrupo: VerdeTier1
-      prefabEnemigo: {fileID: 2180232327059474889, guid: 8c93cf7b40b95444590cfa87f96a38af, type: 3}
-      cantidad: 7
-      tiempoEntreEllos: 0.5
-      tiempoEsperaDespues: 2
-    - nombreGrupo: RosaTier1
-      prefabEnemigo: {fileID: 2180232327059474889, guid: 1afbe424d35e84248821968e9afecbb5, type: 3}
-      cantidad: 15
-      tiempoEntreEllos: 0.5
-      tiempoEsperaDespues: 0
-    - nombreGrupo: RosaTier2
-      prefabEnemigo: {fileID: 2180232327059474889, guid: 36ce8960ce9295d4e823d7d8554cdb54, type: 3}
-      cantidad: 10
-      tiempoEntreEllos: 1
-      tiempoEsperaDespues: 0
-  - nombreRonda: Ronda 8
-    grupos:
-    - nombreGrupo: VerdeTier1
-      prefabEnemigo: {fileID: 2180232327059474889, guid: 8c93cf7b40b95444590cfa87f96a38af, type: 3}
-      cantidad: 7
-      tiempoEntreEllos: 0.5
-      tiempoEsperaDespues: 2
-    - nombreGrupo: NaranjaTier1
-      prefabEnemigo: {fileID: 2180232327059474889, guid: bbe72bc9023cbe0449ead4daa2ca8bab, type: 3}
-      cantidad: 20
-      tiempoEntreEllos: 0.2
-      tiempoEsperaDespues: 0
-    - nombreGrupo: RosaTier2
-      prefabEnemigo: {fileID: 2180232327059474889, guid: 36ce8960ce9295d4e823d7d8554cdb54, type: 3}
-      cantidad: 10
-      tiempoEntreEllos: 0.5
-      tiempoEsperaDespues: 0
-  - nombreRonda: Ronda 9
-    grupos:
-    - nombreGrupo: VerdeTier1
-      prefabEnemigo: {fileID: 2180232327059474889, guid: 8c93cf7b40b95444590cfa87f96a38af, type: 3}
-      cantidad: 10
-      tiempoEntreEllos: 0.5
-      tiempoEsperaDespues: 2
-    - nombreGrupo: RosaTier3
-      prefabEnemigo: {fileID: 7675854331764713123, guid: 6251810a697bd3748b223ce5a9cc8f06, type: 3}
-      cantidad: 1
-      tiempoEntreEllos: 1
-      tiempoEsperaDespues: 0
-  - nombreRonda: Ronda 10
-    grupos:
     - nombreGrupo: RosasTier2
       prefabEnemigo: {fileID: 2180232327059474889, guid: 36ce8960ce9295d4e823d7d8554cdb54, type: 3}
-      cantidad: 6
+      cantidad: 3
       tiempoEntreEllos: 0.5
-      tiempoEsperaDespues: 0
-    - nombreGrupo: NaranjaTier1
-      prefabEnemigo: {fileID: 2180232327059474889, guid: bbe72bc9023cbe0449ead4daa2ca8bab, type: 3}
-      cantidad: 20
-      tiempoEntreEllos: 0.15
-      tiempoEsperaDespues: 2
-    - nombreGrupo: RosaTier1
-      prefabEnemigo: {fileID: 2180232327059474889, guid: 1afbe424d35e84248821968e9afecbb5, type: 3}
-      cantidad: 3
-      tiempoEntreEllos: 0.3
-      tiempoEsperaDespues: 0
-    - nombreGrupo: RosaTier3
-      prefabEnemigo: {fileID: 7675854331764713123, guid: 6251810a697bd3748b223ce5a9cc8f06, type: 3}
-      cantidad: 3
-      tiempoEntreEllos: 0.3
-      tiempoEsperaDespues: 0
-    - nombreGrupo: RosaTier1
-      prefabEnemigo: {fileID: 2180232327059474889, guid: 1afbe424d35e84248821968e9afecbb5, type: 3}
-      cantidad: 3
-      tiempoEntreEllos: 0.3
       tiempoEsperaDespues: 0
   botonEmpezar: {fileID: 2091313628}
   adminNivel: {fileID: 832059179}
@@ -3939,7 +3871,7 @@ MonoBehaviour:
   - nombre: Torre4
     prefabReal: {fileID: 8644672651147763296, guid: 2b815d1effcc7ce4394e46a568e77733, type: 3}
     prefabFantasma: {fileID: 8644672651147763296, guid: f5d72ac2b77536340aefb632dea44bb7, type: 3}
-    costeActual: 1250
+    costeActual: 1000
     multiplicadorCoste: 1.25
     textoBoton: {fileID: 470582990}
   - nombre: Torre5

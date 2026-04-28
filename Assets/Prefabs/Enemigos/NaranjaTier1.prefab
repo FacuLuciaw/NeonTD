@@ -294,10 +294,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   velocidad: 280
-  vidaMax: 60
+  vidaMax: 65
   barraDeVida: {fileID: 704051947671144105}
   danoABase: 50
-  oroAlMorir: 10
+  oroAlMorir: 5
   nombreEnemigo: 'Naranja Tier 1 '
 --- !u!50 &658251800166474911
 Rigidbody2D:

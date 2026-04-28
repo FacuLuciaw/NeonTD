@@ -451,8 +451,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TorreRayo
   danoBasePorSegundo: 5
-  aumentoDeDanoPorSegundo: 20
-  danoMaximo: 200
+  aumentoDeDanoPorSegundo: 50
+  danoMaximo: 500
   puntoDisparo: {fileID: 7865339879541028652}
   grosorRayo: 30
 --- !u!114 &978148534806678770

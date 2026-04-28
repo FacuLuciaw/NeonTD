@@ -406,7 +406,7 @@ MonoBehaviour:
   "ca\xF1onGiratorio": {fileID: 1157311590718106446}
   puntoDeDisparo: {fileID: 7865339879541028652}
   balaPrefab: {fileID: 6614674476980737235, guid: d9efbd3de41cf114ab03dd2d7719b8f7, type: 3}
-  cadenciaDisparo: 1.25
+  cadenciaDisparo: 1.1
   compensacionRotacion: 90
   enemigosEnRango: []
 --- !u!61 &4113843926740437166

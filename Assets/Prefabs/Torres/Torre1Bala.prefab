@@ -107,7 +107,7 @@ MonoBehaviour:
   objetivo: {fileID: 0}
   velocidad: 600
   compensacionRotacion: -90
-  dano: 23
+  dano: 60
   "aplicaDa\xF1oContinuo": 0
   danoPorSegundo: 2
   duracionEfecto: 10

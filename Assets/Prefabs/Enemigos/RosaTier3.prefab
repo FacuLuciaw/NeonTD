@@ -494,7 +494,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   velocidad: 150
-  vidaMax: 350
+  vidaMax: 1000
   barraDeVida: {fileID: 2404023603581390612}
   danoABase: 200
   oroAlMorir: 300
