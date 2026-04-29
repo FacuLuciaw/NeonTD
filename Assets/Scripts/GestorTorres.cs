@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine.UI; // --- NUEVO: Necesario para modificar imágenes ---
 
 [System.Serializable] 
 public class DatosTorre
@@ -11,6 +12,7 @@ public class DatosTorre
     public int costeActual = 200;
     public float multiplicadorCoste = 1.05f;
     public TextMeshProUGUI textoBoton;
+    public Image imagenFondoBoton; // --- NUEVO: Variable para oscurecer el botón ---
 }
 
 public class GestorTorres : MonoBehaviour
@@ -198,6 +200,21 @@ public class GestorTorres : MonoBehaviour
             {
                 catalogoTorres[i].textoBoton.text = catalogoTorres[i].nombre + "\n(" + catalogoTorres[i].costeActual + " Oro)";
             }
+
+            // --- NUEVO: APLICAR FILTRO GRIS ---
+            if (catalogoTorres[i].imagenFondoBoton != null)
+            {
+                // Si el GestorEconomia confirma que hay oro, se pone blanco (color normal), si no, gris oscuro.
+                if (GestorEconomia.instancia.PuedoComprar(catalogoTorres[i].costeActual))
+                {
+                    catalogoTorres[i].imagenFondoBoton.color = Color.white; 
+                }
+                else
+                {
+                    catalogoTorres[i].imagenFondoBoton.color = new Color(0.4f, 0.4f, 0.4f, 1f); 
+                }
+            }
+            // ----------------------------------
         }
     }
 
