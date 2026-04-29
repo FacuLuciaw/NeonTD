@@ -3330,7 +3330,7 @@ MonoBehaviour:
       tiempoEsperaDespues: 2
     - nombreGrupo: NaranjaTier1
       prefabEnemigo: {fileID: 2180232327059474889, guid: bbe72bc9023cbe0449ead4daa2ca8bab, type: 3}
-      cantidad: 20
+      cantidad: 15
       tiempoEntreEllos: 0.2
       tiempoEsperaDespues: 0
     - nombreGrupo: RosaTier2
@@ -3347,8 +3347,13 @@ MonoBehaviour:
       tiempoEsperaDespues: 2
     - nombreGrupo: RosaTier3
       prefabEnemigo: {fileID: 7675854331764713123, guid: 6251810a697bd3748b223ce5a9cc8f06, type: 3}
-      cantidad: 1
+      cantidad: 2
       tiempoEntreEllos: 1
+      tiempoEsperaDespues: 0
+    - nombreGrupo: NaranjaTier1
+      prefabEnemigo: {fileID: 2180232327059474889, guid: bbe72bc9023cbe0449ead4daa2ca8bab, type: 3}
+      cantidad: 15
+      tiempoEntreEllos: 0.2
       tiempoEsperaDespues: 0
   - nombreRonda: Ronda 10
     grupos:
@@ -3369,7 +3374,7 @@ MonoBehaviour:
       tiempoEsperaDespues: 0
     - nombreGrupo: RosaTier3
       prefabEnemigo: {fileID: 7675854331764713123, guid: 6251810a697bd3748b223ce5a9cc8f06, type: 3}
-      cantidad: 3
+      cantidad: 4
       tiempoEntreEllos: 0.3
       tiempoEsperaDespues: 0
     - nombreGrupo: RosaTier1
@@ -3922,7 +3927,7 @@ MonoBehaviour:
     prefabReal: {fileID: 8644672651147763296, guid: 7f1c1d731a95aeb4eae0e6aa2ea988f5, type: 3}
     prefabFantasma: {fileID: 8644672651147763296, guid: e2bddcb92c2242e45b271e615ed0af56, type: 3}
     costeActual: 100
-    multiplicadorCoste: 1.25
+    multiplicadorCoste: 1.33
     textoBoton: {fileID: 1180676787}
   - nombre: Torre2
     prefabReal: {fileID: 8644672651147763296, guid: 396b008cb826bef4a87ad19f7ea3857d, type: 3}
@@ -3991,7 +3996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6abc5d36ed0c6d24ea4dba0c6dd139b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GestorEconomia
-  oroActual: 225
+  oroActual: 233
   textoOro: {fileID: 1841027398}
 --- !u!114 &2103929301
 MonoBehaviour:

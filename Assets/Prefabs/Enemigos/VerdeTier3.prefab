@@ -234,7 +234,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  velocidad: 75
+  velocidad: 100
   vidaMax: 1000
   barraDeVida: {fileID: 704051947671144105}
   danoABase: 500
