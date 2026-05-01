@@ -8,6 +8,10 @@ public class GestorEconomia : MonoBehaviour
 
     [Header("Dinero")]
     public int oroActual = 15; // Empezamos con 15 para que puedas poner un par de torres al inicio
+    
+    [Tooltip("Multiplica el oro ganado. Ej: 1 = Normal, 2 = El Doble, 1.5 = 50% más")]
+    public float multiplicadorOro = 1f; 
+    
     public TextMeshProUGUI textoOro; // El texto de la pantalla
 
     void Awake()
@@ -28,12 +32,15 @@ public class GestorEconomia : MonoBehaviour
     // Los enemigos llamarán a esta función al morir
     public void SumarOro(int cantidad)
     {
-        oroActual += cantidad;
+        // Aplicamos el multiplicador y redondeamos al entero más cercano
+        int cantidadFinal = Mathf.RoundToInt(cantidad * multiplicadorOro);
+
+        oroActual += cantidadFinal;
         
-        // Registramos el dinero ganado en la partida
+        // Registramos el dinero ganado en la partida usando la cantidad ya multiplicada
         if (GestorDatosPartida.instancia != null)
         {
-            GestorDatosPartida.instancia.RegistrarOroGanado(cantidad);
+            GestorDatosPartida.instancia.RegistrarOroGanado(cantidadFinal);
         }
         
         ActualizarTextoUI();
