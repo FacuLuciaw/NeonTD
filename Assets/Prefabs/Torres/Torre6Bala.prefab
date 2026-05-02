@@ -155,5 +155,5 @@ MonoBehaviour:
   compensacionRotacion: -90
   dano: 0
   "aplicaDa\xF1oContinuo": 1
-  danoPorSegundo: 5
+  danoPorSegundo: 30
   duracionEfecto: 10
