@@ -4288,14 +4288,14 @@ MonoBehaviour:
   - nombre: Torre5
     prefabReal: {fileID: 8644672651147763296, guid: 76f0bfe579edf1f428de917a363ffc96, type: 3}
     prefabFantasma: {fileID: 8644672651147763296, guid: 95c3564ba51348044a2d6bd94fbb315b, type: 3}
-    costeActual: 1000
+    costeActual: 3000
     multiplicadorCoste: 1.25
     textoBoton: {fileID: 136568446}
     imagenFondoBoton: {fileID: 1637544360}
   - nombre: Torre6
     prefabReal: {fileID: 8644672651147763296, guid: e8372b03e2212f64fb840b6a2b8a42fe, type: 3}
     prefabFantasma: {fileID: 8644672651147763296, guid: c0278b952c8147a46ae61efc0ee8c864, type: 3}
-    costeActual: 1000
+    costeActual: 1500
     multiplicadorCoste: 1.25
     textoBoton: {fileID: 998035072}
     imagenFondoBoton: {fileID: 1791715117}

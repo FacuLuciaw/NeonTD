@@ -7005,28 +7005,28 @@ MonoBehaviour:
   - nombre: Torre3
     prefabReal: {fileID: 8644672651147763296, guid: 476aa136d4f722e438509ab91548309f, type: 3}
     prefabFantasma: {fileID: 8644672651147763296, guid: eeb62be670233184bba72532eb76f461, type: 3}
-    costeActual: 1000
+    costeActual: 2000
     multiplicadorCoste: 1.1
     textoBoton: {fileID: 631692935}
     imagenFondoBoton: {fileID: 1862286875}
   - nombre: Torre4
     prefabReal: {fileID: 8644672651147763296, guid: 2b815d1effcc7ce4394e46a568e77733, type: 3}
     prefabFantasma: {fileID: 8644672651147763296, guid: f5d72ac2b77536340aefb632dea44bb7, type: 3}
-    costeActual: 1000
+    costeActual: 1250
     multiplicadorCoste: 1.1
     textoBoton: {fileID: 1992882212}
     imagenFondoBoton: {fileID: 240918553}
   - nombre: Torre5
     prefabReal: {fileID: 8644672651147763296, guid: 76f0bfe579edf1f428de917a363ffc96, type: 3}
     prefabFantasma: {fileID: 8644672651147763296, guid: 95c3564ba51348044a2d6bd94fbb315b, type: 3}
-    costeActual: 1000
+    costeActual: 3000
     multiplicadorCoste: 1.1
     textoBoton: {fileID: 977658561}
     imagenFondoBoton: {fileID: 1748279423}
   - nombre: Torre6
     prefabReal: {fileID: 8644672651147763296, guid: e8372b03e2212f64fb840b6a2b8a42fe, type: 3}
     prefabFantasma: {fileID: 8644672651147763296, guid: c0278b952c8147a46ae61efc0ee8c864, type: 3}
-    costeActual: 1000
+    costeActual: 1500
     multiplicadorCoste: 1.1
     textoBoton: {fileID: 616093707}
     imagenFondoBoton: {fileID: 691174159}
