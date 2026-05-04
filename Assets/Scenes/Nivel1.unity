@@ -803,6 +803,7 @@ GameObject:
   - component: {fileID: 378893834}
   - component: {fileID: 378893833}
   - component: {fileID: 378893832}
+  - component: {fileID: 378893836}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -839,12 +840,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 2560, y: 1440}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -895,6 +896,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &378893836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378893831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0d63d59d0464574be49743dad64aa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VincularCanvasCamara
 --- !u!1 &420556363
 GameObject:
   m_ObjectHideFlags: 0
@@ -3807,27 +3820,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5892612881795183965, guid: f4446724647dc4fe09acec9a4d91021b, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5892612881795183965, guid: f4446724647dc4fe09acec9a4d91021b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5892612881795183965, guid: f4446724647dc4fe09acec9a4d91021b, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5892612881795183965, guid: f4446724647dc4fe09acec9a4d91021b, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5892612881795183965, guid: f4446724647dc4fe09acec9a4d91021b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 2560
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5892612881795183965, guid: f4446724647dc4fe09acec9a4d91021b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1440
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5892612881795183965, guid: f4446724647dc4fe09acec9a4d91021b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3859,7 +3872,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5892612881795183965, guid: f4446724647dc4fe09acec9a4d91021b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.00012207031
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5892612881795183965, guid: f4446724647dc4fe09acec9a4d91021b, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4336,6 +4349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GestorEconomia
   oroActual: 233
+  multiplicadorOro: 1
   textoOro: {fileID: 1841027398}
 --- !u!114 &2103929301
 MonoBehaviour:
