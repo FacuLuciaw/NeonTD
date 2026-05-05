@@ -298,7 +298,7 @@ MonoBehaviour:
   barraDeVida: {fileID: 704051947671144105}
   danoABase: 75
   oroAlMorir: 15
-  nombreEnemigo: Naranja Tier 2
+  nombreEnemigo: enemigonaranja2
 --- !u!50 &658251800166474911
 Rigidbody2D:
   serializedVersion: 5

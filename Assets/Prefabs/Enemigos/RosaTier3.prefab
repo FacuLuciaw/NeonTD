@@ -498,7 +498,7 @@ MonoBehaviour:
   barraDeVida: {fileID: 2404023603581390612}
   danoABase: 200
   oroAlMorir: 300
-  nombreEnemigo: Rosa Tier 3
+  nombreEnemigo: enemigorosa3
 --- !u!50 &3231253195543541612
 Rigidbody2D:
   serializedVersion: 5

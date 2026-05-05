@@ -3308,7 +3308,7 @@ MonoBehaviour:
   rondas:
   - nombreRonda: Ronda 1
     grupos:
-    - nombreGrupo: RosasTier1
+    - nombreGrupo: enemigorosa1
       prefabEnemigo: {fileID: 2180232327059474889, guid: 1afbe424d35e84248821968e9afecbb5, type: 3}
       cantidad: 10
       tiempoEntreEllos: 1.17
@@ -4257,42 +4257,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GestorTorres
   catalogoTorres:
-  - nombre: Torre1
+  - nombre: torreazul
     prefabReal: {fileID: 8644672651147763296, guid: 7f1c1d731a95aeb4eae0e6aa2ea988f5, type: 3}
     prefabFantasma: {fileID: 8644672651147763296, guid: e2bddcb92c2242e45b271e615ed0af56, type: 3}
     costeActual: 100
     multiplicadorCoste: 1.33
     textoBoton: {fileID: 1180676787}
     imagenFondoBoton: {fileID: 1240820595}
-  - nombre: Torre2
+  - nombre: torreroja
     prefabReal: {fileID: 8644672651147763296, guid: 396b008cb826bef4a87ad19f7ea3857d, type: 3}
     prefabFantasma: {fileID: 8644672651147763296, guid: a8e424d7e328eaf46af18efad5feafe9, type: 3}
     costeActual: 500
     multiplicadorCoste: 1.25
     textoBoton: {fileID: 1343835899}
     imagenFondoBoton: {fileID: 1740251295}
-  - nombre: Torre3
+  - nombre: torreamarilla
     prefabReal: {fileID: 8644672651147763296, guid: 476aa136d4f722e438509ab91548309f, type: 3}
     prefabFantasma: {fileID: 8644672651147763296, guid: eeb62be670233184bba72532eb76f461, type: 3}
     costeActual: 2000
     multiplicadorCoste: 1.25
     textoBoton: {fileID: 446392852}
     imagenFondoBoton: {fileID: 356883517}
-  - nombre: Torre4
+  - nombre: torrelaser
     prefabReal: {fileID: 8644672651147763296, guid: 2b815d1effcc7ce4394e46a568e77733, type: 3}
     prefabFantasma: {fileID: 8644672651147763296, guid: f5d72ac2b77536340aefb632dea44bb7, type: 3}
     costeActual: 1250
     multiplicadorCoste: 1.25
     textoBoton: {fileID: 470582990}
     imagenFondoBoton: {fileID: 1151309695}
-  - nombre: Torre5
+  - nombre: torrepiercing
     prefabReal: {fileID: 8644672651147763296, guid: 76f0bfe579edf1f428de917a363ffc96, type: 3}
     prefabFantasma: {fileID: 8644672651147763296, guid: 95c3564ba51348044a2d6bd94fbb315b, type: 3}
     costeActual: 3000
     multiplicadorCoste: 1.25
     textoBoton: {fileID: 136568446}
     imagenFondoBoton: {fileID: 1637544360}
-  - nombre: Torre6
+  - nombre: torreveneno
     prefabReal: {fileID: 8644672651147763296, guid: e8372b03e2212f64fb840b6a2b8a42fe, type: 3}
     prefabFantasma: {fileID: 8644672651147763296, guid: c0278b952c8147a46ae61efc0ee8c864, type: 3}
     costeActual: 1500

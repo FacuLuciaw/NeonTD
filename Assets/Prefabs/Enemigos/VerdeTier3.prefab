@@ -239,7 +239,7 @@ MonoBehaviour:
   barraDeVida: {fileID: 704051947671144105}
   danoABase: 500
   oroAlMorir: 150
-  nombreEnemigo: Verde Tier 3
+  nombreEnemigo: enemigoverde3
 --- !u!50 &658251800166474911
 Rigidbody2D:
   serializedVersion: 5

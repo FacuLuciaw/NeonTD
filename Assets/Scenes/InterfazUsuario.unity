@@ -4645,13 +4645,13 @@ MonoBehaviour:
   imgMapaFondo: {fileID: 11036432}
   txtDificultad: {fileID: 1903840972}
   mapasDisponibles:
-  - nombreDificultad: "F\xE1cil"
+  - nombreDificultad: facil
     imagenDelMapa: {fileID: -5840197071805953744, guid: e5c72ba4d7cbfe942893b9495c9d21a8, type: 3}
     nombreEscenaUnity: Nivel1
-  - nombreDificultad: Normal
+  - nombreDificultad: normal
     imagenDelMapa: {fileID: 6299396901515513514, guid: 3ffe0e6f6f4cdf94586fbe34f51ad6cf, type: 3}
     nombreEscenaUnity: Nivel2
-  - nombreDificultad: "Dif\xEDcil"
+  - nombreDificultad: dificil
     imagenDelMapa: {fileID: -245458310359619678, guid: b98aa826b8f5d344480f9e1d1495084a, type: 3}
     nombreEscenaUnity: Nivel3
 --- !u!1001 &1947376699

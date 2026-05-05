@@ -10,7 +10,8 @@ public class GrupoEnemigos
     public GameObject prefabEnemigo;
     public int cantidad;
     public float tiempoEntreEllos = 1.5f;
-    public float tiempoEsperaDespues = 3.0f; 
+    public float tiempoEsperaDespues = 3.0f;
+    public string nombreEnemigoDB = ""; // Nombre del enemigo para la BD (si está vacío, usa el nombre del prefab)
 }
 
 [System.Serializable]
@@ -120,7 +121,7 @@ public class GeneradorEnemigos : MonoBehaviour
         }
     }
 
-    void CrearEnemigo(GameObject prefab)
+    void CrearEnemigo(GameObject prefab, string nombreEnemigoDB = "")
     {
         if (prefab != null && puntoDeSalida != null)
         {
@@ -130,7 +131,8 @@ public class GeneradorEnemigos : MonoBehaviour
             if (scriptEnemigo != null)
             {
                 scriptEnemigo.puntos = puntosCamino;
-                scriptEnemigo.nombreEnemigo = prefab.name; // Asignar el nombre del prefab como nombre del enemigo
+                // Usar el nombre de BD si se proporciona, si no, usar el nombre del prefab
+                scriptEnemigo.nombreEnemigo = !string.IsNullOrEmpty(nombreEnemigoDB) ? nombreEnemigoDB : prefab.name;
 
                 // Registrar el enemigo como activo
                 if (GestorDatosPartida.instancia != null)

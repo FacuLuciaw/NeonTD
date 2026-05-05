@@ -66,6 +66,11 @@ public class LogicaEnemigo : MonoBehaviour
     {
         if (indicePunto >= puntos.Length)
         {
+            // Remover el enemigo de activos cuando escapa
+            if (GestorDatosPartida.instancia != null)
+            {
+                GestorDatosPartida.instancia.RemoverEnemigoActivo(nombreEnemigo);
+            }
             Destroy(gameObject);
             return;
         }
