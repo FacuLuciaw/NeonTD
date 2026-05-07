@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 658251800166474911}
   - component: {fileID: 6357508332389265385}
   m_Layer: 0
-  m_Name: VerdeTier2
+  m_Name: Velarth
   m_TagString: Enemigo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -262,7 +262,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 3612610940796843506, guid: fa7ec26a728f16e4ebd8238f811ff211, type: 3}
+  m_Sprite: {fileID: 594287074168525218, guid: eaf73d15ab5cc594fafc139f9de2ba04, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -293,12 +293,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  velocidad: 125
-  vidaMax: 888
+  velocidad: 175
+  vidaMax: 200
   barraDeVida: {fileID: 704051947671144105}
-  danoABase: 375
-  oroAlMorir: 150
-  nombreEnemigo: enemigoverde2
+  danoABase: 125
+  oroAlMorir: 45
+  nombreEnemigo: enemigorosa2
 --- !u!50 &658251800166474911
 Rigidbody2D:
   serializedVersion: 5

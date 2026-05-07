@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 141575627701469367}
   - component: {fileID: 2204723909831464672}
   m_Layer: 5
-  m_Name: BotonTorre2
+  m_Name: BotonTorreTrituradora
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -975,7 +975,7 @@ GameObject:
   - component: {fileID: 3483755723312347201}
   - component: {fileID: 6139812983910041012}
   m_Layer: 5
-  m_Name: BotonTorre1
+  m_Name: BotonTorrePulso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1308,7 +1308,7 @@ GameObject:
   - component: {fileID: 2207973832269295179}
   - component: {fileID: 1307254766458054826}
   m_Layer: 5
-  m_Name: BotonTorre3
+  m_Name: BotonTorreLaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1516,7 +1516,7 @@ GameObject:
   - component: {fileID: 5779997359326984925}
   - component: {fileID: 5803756734438132812}
   m_Layer: 5
-  m_Name: BotonTorre6
+  m_Name: BotonTorrePerforante
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1648,7 +1648,7 @@ GameObject:
   - component: {fileID: 2985627251230053448}
   - component: {fileID: 7964717646850390361}
   m_Layer: 5
-  m_Name: BotonTorre5
+  m_Name: BotonTorreTesla
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2349,7 +2349,7 @@ GameObject:
   - component: {fileID: 4883131865864098429}
   - component: {fileID: 5239423367753004358}
   m_Layer: 5
-  m_Name: BotonTorre4
+  m_Name: BotonTorreVeneno
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2478,7 +2478,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2640176870638228100, guid: dde791f429ff341e88a68d1fce015d58, type: 3}
       propertyPath: m_Name
-      value: contTorre2
+      value: contTorreTrituradora
       objectReference: {fileID: 0}
     - target: {fileID: 2899743231235775921, guid: dde791f429ff341e88a68d1fce015d58, type: 3}
       propertyPath: m_RaycastTarget
@@ -2657,7 +2657,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2640176870638228100, guid: dde791f429ff341e88a68d1fce015d58, type: 3}
       propertyPath: m_Name
-      value: contTorre5
+      value: contTorreTesla
       objectReference: {fileID: 0}
     - target: {fileID: 2899743231235775921, guid: dde791f429ff341e88a68d1fce015d58, type: 3}
       propertyPath: m_RaycastTarget
@@ -2836,7 +2836,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2640176870638228100, guid: dde791f429ff341e88a68d1fce015d58, type: 3}
       propertyPath: m_Name
-      value: contTorre1
+      value: contTorrePulso
       objectReference: {fileID: 0}
     - target: {fileID: 2899743231235775921, guid: dde791f429ff341e88a68d1fce015d58, type: 3}
       propertyPath: m_RaycastTarget
@@ -3015,7 +3015,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2640176870638228100, guid: dde791f429ff341e88a68d1fce015d58, type: 3}
       propertyPath: m_Name
-      value: contTorre4
+      value: contTorreVeneno
       objectReference: {fileID: 0}
     - target: {fileID: 2899743231235775921, guid: dde791f429ff341e88a68d1fce015d58, type: 3}
       propertyPath: m_RaycastTarget
@@ -3194,7 +3194,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2640176870638228100, guid: dde791f429ff341e88a68d1fce015d58, type: 3}
       propertyPath: m_Name
-      value: contTorre3
+      value: contTorreLaser
       objectReference: {fileID: 0}
     - target: {fileID: 2899743231235775921, guid: dde791f429ff341e88a68d1fce015d58, type: 3}
       propertyPath: m_RaycastTarget
@@ -3835,7 +3835,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2640176870638228100, guid: dde791f429ff341e88a68d1fce015d58, type: 3}
       propertyPath: m_Name
-      value: contTorre6
+      value: contTorrePerforante
       objectReference: {fileID: 0}
     - target: {fileID: 2899743231235775921, guid: dde791f429ff341e88a68d1fce015d58, type: 3}
       propertyPath: m_RaycastTarget

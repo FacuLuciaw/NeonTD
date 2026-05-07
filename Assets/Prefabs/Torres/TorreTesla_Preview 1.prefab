@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 3153107222300048755}
   - component: {fileID: 2628372874966155397}
   m_Layer: 2
-  m_Name: TORRE3_Preview 1
+  m_Name: TorreTesla_Preview 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

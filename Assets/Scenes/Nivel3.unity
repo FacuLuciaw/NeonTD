@@ -903,6 +903,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SeleccionarTorre
       objectReference: {fileID: 0}
+    - target: {fileID: 1307254766458054826, guid: f4446724647dc4fe09acec9a4d91021b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1371636727636107089, guid: f4446724647dc4fe09acec9a4d91021b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -1231,6 +1235,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SeleccionarTorre
       objectReference: {fileID: 0}
+    - target: {fileID: 5239423367753004358, guid: f4446724647dc4fe09acec9a4d91021b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5803756734438132812, guid: f4446724647dc4fe09acec9a4d91021b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1238,6 +1246,10 @@ PrefabInstance:
     - target: {fileID: 5803756734438132812, guid: f4446724647dc4fe09acec9a4d91021b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SeleccionarTorre
+      objectReference: {fileID: 0}
+    - target: {fileID: 5803756734438132812, guid: f4446724647dc4fe09acec9a4d91021b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5892612881795183965, guid: f4446724647dc4fe09acec9a4d91021b, type: 3}
       propertyPath: m_Pivot.x
@@ -1378,6 +1390,10 @@ PrefabInstance:
     - target: {fileID: 7964717646850390361, guid: f4446724647dc4fe09acec9a4d91021b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SeleccionarTorre
+      objectReference: {fileID: 0}
+    - target: {fileID: 7964717646850390361, guid: f4446724647dc4fe09acec9a4d91021b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8860973185351317196, guid: f4446724647dc4fe09acec9a4d91021b, type: 3}
       propertyPath: m_Name
@@ -6988,48 +7004,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GestorTorres
   catalogoTorres:
-  - nombre: Torre1
+  - nombre: Pulso
     prefabReal: {fileID: 8644672651147763296, guid: 7f1c1d731a95aeb4eae0e6aa2ea988f5, type: 3}
     prefabFantasma: {fileID: 8644672651147763296, guid: e2bddcb92c2242e45b271e615ed0af56, type: 3}
     costeActual: 100
     multiplicadorCoste: 1.1
     textoBoton: {fileID: 2134321026}
     imagenFondoBoton: {fileID: 1475830638}
-  - nombre: Torre2
+  - nombre: Trituradora
     prefabReal: {fileID: 8644672651147763296, guid: 396b008cb826bef4a87ad19f7ea3857d, type: 3}
     prefabFantasma: {fileID: 8644672651147763296, guid: a8e424d7e328eaf46af18efad5feafe9, type: 3}
     costeActual: 500
     multiplicadorCoste: 1.1
     textoBoton: {fileID: 537492782}
     imagenFondoBoton: {fileID: 1296690276}
-  - nombre: Torre3
-    prefabReal: {fileID: 8644672651147763296, guid: 476aa136d4f722e438509ab91548309f, type: 3}
-    prefabFantasma: {fileID: 8644672651147763296, guid: eeb62be670233184bba72532eb76f461, type: 3}
-    costeActual: 2000
-    multiplicadorCoste: 1.1
-    textoBoton: {fileID: 631692935}
-    imagenFondoBoton: {fileID: 1862286875}
-  - nombre: Torre4
+  - nombre: Laser
     prefabReal: {fileID: 8644672651147763296, guid: 2b815d1effcc7ce4394e46a568e77733, type: 3}
     prefabFantasma: {fileID: 8644672651147763296, guid: f5d72ac2b77536340aefb632dea44bb7, type: 3}
     costeActual: 1250
     multiplicadorCoste: 1.1
     textoBoton: {fileID: 1992882212}
     imagenFondoBoton: {fileID: 240918553}
-  - nombre: Torre5
-    prefabReal: {fileID: 8644672651147763296, guid: 76f0bfe579edf1f428de917a363ffc96, type: 3}
-    prefabFantasma: {fileID: 8644672651147763296, guid: 95c3564ba51348044a2d6bd94fbb315b, type: 3}
-    costeActual: 3000
-    multiplicadorCoste: 1.1
-    textoBoton: {fileID: 977658561}
-    imagenFondoBoton: {fileID: 1748279423}
-  - nombre: Torre6
+  - nombre: Veneno
     prefabReal: {fileID: 8644672651147763296, guid: e8372b03e2212f64fb840b6a2b8a42fe, type: 3}
     prefabFantasma: {fileID: 8644672651147763296, guid: c0278b952c8147a46ae61efc0ee8c864, type: 3}
     costeActual: 1500
     multiplicadorCoste: 1.1
     textoBoton: {fileID: 616093707}
     imagenFondoBoton: {fileID: 691174159}
+  - nombre: Tesla
+    prefabReal: {fileID: 8644672651147763296, guid: 476aa136d4f722e438509ab91548309f, type: 3}
+    prefabFantasma: {fileID: 8644672651147763296, guid: eeb62be670233184bba72532eb76f461, type: 3}
+    costeActual: 2000
+    multiplicadorCoste: 1.1
+    textoBoton: {fileID: 631692935}
+    imagenFondoBoton: {fileID: 1862286875}
+  - nombre: Perforante
+    prefabReal: {fileID: 8644672651147763296, guid: 76f0bfe579edf1f428de917a363ffc96, type: 3}
+    prefabFantasma: {fileID: 8644672651147763296, guid: 95c3564ba51348044a2d6bd94fbb315b, type: 3}
+    costeActual: 3000
+    multiplicadorCoste: 1.1
+    textoBoton: {fileID: 977658561}
+    imagenFondoBoton: {fileID: 1748279423}
   capasBloqueadas:
     serializedVersion: 2
     m_Bits: 72

@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 3231253195543541612}
   - component: {fileID: 9084659080982848078}
   m_Layer: 0
-  m_Name: RosaTier3
+  m_Name: Velariath
   m_TagString: Enemigo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

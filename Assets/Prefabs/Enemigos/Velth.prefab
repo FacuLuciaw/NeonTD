@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.01, y: 1.2}
+  m_AnchoredPosition: {x: 0.01, y: 1.25}
   m_SizeDelta: {x: 153.6103, y: 13.226}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7688537054429225755
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 658251800166474911}
   - component: {fileID: 6357508332389265385}
   m_Layer: 0
-  m_Name: NaranjaTier1
+  m_Name: Velth
   m_TagString: Enemigo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -262,7 +262,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 4672535299546684894, guid: a04b12a095201dc4189ed57040106e0c, type: 3}
+  m_Sprite: {fileID: -2457175209732051007, guid: 2bd458a56c2fdbe4db02d01b16a4ebe0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -293,12 +293,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  velocidad: 280
-  vidaMax: 65
+  velocidad: 175
+  vidaMax: 100
   barraDeVida: {fileID: 704051947671144105}
-  danoABase: 50
-  oroAlMorir: 5
-  nombreEnemigo: enemigonaranja1
+  danoABase: 75
+  oroAlMorir: 20
+  nombreEnemigo: enemigorosa1
 --- !u!50 &658251800166474911
 Rigidbody2D:
   serializedVersion: 5

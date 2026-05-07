@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 233166643509768763}
   - component: {fileID: 1509299126673011918}
-  - component: {fileID: 6150537381367048702}
   m_Layer: 0
-  m_Name: Torre1Bala
+  m_Name: TorreTeslaBala
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,8 +81,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 20
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 2224507448480753444, guid: 132e93f8adf679a429ec7a6cf68bf466, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: -3635928049972896002, guid: 7554819f06974d94b96c425570156590, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -92,22 +91,3 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &6150537381367048702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6614674476980737235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e759c0b58eb0564694899b141ff2bed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LogicaBala
-  objetivo: {fileID: 0}
-  velocidad: 600
-  compensacionRotacion: -90
-  dano: 60
-  "aplicaDa\xF1oContinuo": 0
-  danoPorSegundo: 2
-  duracionEfecto: 10
