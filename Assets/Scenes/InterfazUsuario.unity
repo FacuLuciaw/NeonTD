@@ -4973,6 +4973,7 @@ MonoBehaviour:
   txtDanoInfligido: {fileID: 251026735}
   txtTotalTorres: {fileID: 888532216}
   apiURL: https://hjjyx2dydd.execute-api.us-east-1.amazonaws.com/default/L_Unity_Login_towerdefens
+  urlHistorial: https://688mn3wjo2.execute-api.us-east-1.amazonaws.com/default/L_Unity_Historial_towerdefender
 --- !u!4 &1938158076
 Transform:
   m_ObjectHideFlags: 0
