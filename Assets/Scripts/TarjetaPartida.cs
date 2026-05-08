@@ -27,7 +27,9 @@ public class TarjetaPartida : MonoBehaviour
             textResultado.color = Color.green;
         else if (resultado.ToLower() == "derrota")
             textResultado.color = Color.red;
+        else if (resultado.ToLower() == "infinito")
+            textResultado.color = Color.cyan;
         else
-            textResultado.color = Color.gray; // Para casos como "Rendición"
+            textResultado.color = Color.orange; // Para casos como "Rendición"
     }
 }

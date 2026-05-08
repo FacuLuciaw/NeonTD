@@ -5,32 +5,74 @@ using UnityEngine.SceneManagement;
 public class AdministradorNivel : MonoBehaviour
 {
     [Header("Pantallas")]
-    public GameObject hudPrincipal; // Añadido para que los menús no se superpongan
+    public GameObject hudPrincipal; 
     public GameObject pantallaFinJuego; 
-    public GameObject pantallaEstadisticas; // Conectamos la pantalla aquí
+    public GameObject pantallaEstadisticas; 
+    
+    // --- NUEVO: PANTALLA DE CONFIGURACIÓN / PAUSA ---
+    public GameObject pantallaConfiguracion; 
+    // ------------------------------------------------
+
+    [Header("Conexiones")]
+    public GeneradorEnemigos generadorEnemigos; 
 
     [Header("Botones Especiales")]
-    public GameObject botonModoInfinito; // Conecta aquí tu botón de Modo Infinito
+    public GameObject botonModoInfinito; 
 
     [Header("Textos")]
     public TMP_Text txtResultado;
 
     [Header("Estado del juego")]
     public bool juegoFinalizado = false;
-    public bool enModoInfinito = false; // Variable para avisar a los enemigos que es infinito
-
-    [Header("Conexiones")]
-    public GeneradorEnemigos generadorEnemigos; // <--- PUENTE AL GENERADOR
+    public bool enModoInfinito = false; 
+    
+    // --- NUEVO: Control de pausa ---
+    private bool juegoPausado = false;
+    // -------------------------------
 
     void Start()
     {
-        // Nos aseguramos de que todo esté en orden al iniciar la partida
         if (hudPrincipal != null) hudPrincipal.SetActive(true);
         if (pantallaFinJuego != null) pantallaFinJuego.SetActive(false);
         if (botonModoInfinito != null) botonModoInfinito.SetActive(false);
+        
+        // Nos aseguramos de que el menú de configuración esté apagado al empezar
+        if (pantallaConfiguracion != null) pantallaConfiguracion.SetActive(false);
     }
 
-    // Se llama cuando los enemigos destruyen tu torre
+    // --- NUEVO: VIGILAMOS EL TECLADO EN TODO MOMENTO ---
+    void Update()
+    {
+        // Si el juego ya terminó (ganaste o perdiste), no hacemos nada con el ESC
+        if (juegoFinalizado) return;
+
+        // Si el jugador pulsa la tecla Escape
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            AlternarPausa();
+        }
+    }
+
+    // --- NUEVO: INTERRUPTOR DE PAUSA ---
+    public void AlternarPausa()
+    {
+        juegoPausado = !juegoPausado; // Invertimos el estado (de falso a verdadero y viceversa)
+
+        if (juegoPausado)
+        {
+            // PAUSAR EL JUEGO
+            Time.timeScale = 0f; // Congelamos el tiempo
+            if (pantallaConfiguracion != null) pantallaConfiguracion.SetActive(true); // Mostramos el menú
+        }
+        else
+        {
+            // REANUDAR EL JUEGO
+            Time.timeScale = 1f; // Descongelamos el tiempo
+            if (pantallaConfiguracion != null) pantallaConfiguracion.SetActive(false); // Ocultamos el menú
+        }
+    }
+    // ------------------------------------
+
     public void MostrarDerrota()
     {
         if (juegoFinalizado) return;
@@ -42,14 +84,16 @@ public class AdministradorNivel : MonoBehaviour
             GestorDatosPartida.instancia.GuardarPartidaAWS();
         }
 
-        if (hudPrincipal != null) hudPrincipal.SetActive(false); // Apagamos el HUD principal
-        if (botonModoInfinito != null) botonModoInfinito.SetActive(false); // Ocultamos el botón infinito
+        if (hudPrincipal != null) hudPrincipal.SetActive(false); 
+        if (botonModoInfinito != null) botonModoInfinito.SetActive(false); 
 
         pantallaFinJuego.SetActive(true);
-        pantallaEstadisticas.SetActive(false); // Nos aseguramos de que estadísticas esté apagada
+        pantallaEstadisticas.SetActive(false); 
+        if (pantallaConfiguracion != null) pantallaConfiguracion.SetActive(false); // Por seguridad, ocultamos config
+
         txtResultado.text = "¡BASE DESTRUIDA!";
         txtResultado.color = Color.red; 
-        Time.timeScale = 0f; // El juego se congela
+        Time.timeScale = 0f; 
     }
 
     public void MostrarVictoria()
@@ -63,19 +107,19 @@ public class AdministradorNivel : MonoBehaviour
             GestorDatosPartida.instancia.GuardarPartidaAWS();
         }
 
-        if (hudPrincipal != null) hudPrincipal.SetActive(false); // Apagamos el HUD principal
+        if (hudPrincipal != null) hudPrincipal.SetActive(false); 
 
-        // ¡ENCENDEMOS EL BOTÓN INFINITO SOLO EN VICTORIA!
         if (botonModoInfinito != null) botonModoInfinito.SetActive(true);
 
         pantallaFinJuego.SetActive(true);
-        pantallaEstadisticas.SetActive(false); // Nos aseguramos de que estadísticas esté apagada
+        pantallaEstadisticas.SetActive(false); 
+        if (pantallaConfiguracion != null) pantallaConfiguracion.SetActive(false); // Por seguridad, ocultamos config
+
         txtResultado.text = "¡VICTORIA!";
         txtResultado.color = Color.green; 
-        Time.timeScale = 0f; // El juego se congela
+        Time.timeScale = 0f; 
     }
 
-    // --- FUNCIÓN PARA EL BOTÓN DE SALIR/RENDIRSE ---
     public void Rendirse()
     {
         if (juegoFinalizado) return;
@@ -87,75 +131,58 @@ public class AdministradorNivel : MonoBehaviour
             GestorDatosPartida.instancia.GuardarPartidaAWS();
         }
 
-        if (hudPrincipal != null) hudPrincipal.SetActive(false); // Apagamos el HUD principal
-        if (botonModoInfinito != null) botonModoInfinito.SetActive(false); // Ocultamos el botón infinito
+        if (hudPrincipal != null) hudPrincipal.SetActive(false); 
+        if (botonModoInfinito != null) botonModoInfinito.SetActive(false); 
 
         pantallaFinJuego.SetActive(true);
         pantallaEstadisticas.SetActive(false); 
+        if (pantallaConfiguracion != null) pantallaConfiguracion.SetActive(false); // Por seguridad, ocultamos config
+
         txtResultado.text = "¡TE HAS RENDIDO!"; 
         txtResultado.color = new Color(1f, 0.5f, 0f); 
         Time.timeScale = 0f; 
     }
 
-    // --- NUEVO: FUNCIÓN PARA CONTINUAR JUGANDO ---
-// --- NUEVO: FUNCIÓN PARA CONTINUAR JUGANDO ---
     public void IniciarModoInfinito()
     {
-        juegoFinalizado = false; // El juego vuelve a estar activo
-        enModoInfinito = true;   // Activamos la bandera de modo infinito
+        juegoFinalizado = false; 
+        enModoInfinito = true;   
 
-        // Reseteamos los datos de la partida para el modo infinito
-        if (GestorDatosPartida.instancia != null)
-        {
-            GestorDatosPartida.instancia.ResetearParaModoInfinito();
-        }
-
-        // --------------------------
-
-         if (generadorEnemigos != null)
+        if (generadorEnemigos != null)
         {
             generadorEnemigos.ActivarModoInfinito();
         }
 
-        pantallaFinJuego.SetActive(false); // Cerramos el menú de victoria
+        pantallaFinJuego.SetActive(false); 
         
-        if (hudPrincipal != null) hudPrincipal.SetActive(true); // Devolvemos el HUD al jugador
+        if (hudPrincipal != null) hudPrincipal.SetActive(true); 
 
-        Time.timeScale = 1f; // ¡Descongelamos el tiempo!
+        Time.timeScale = 1f; 
     }
 
-    // El botón "Ver Estadísticas" de la pantalla de Fin de Partida llamará a esto
     public void AbrirEstadisticas()
     {
         pantallaFinJuego.SetActive(false);     
         pantallaEstadisticas.SetActive(true);  
     }
 
-    // El botón "Volver al Menú" (tanto el de derrota como el de estadísticas) llamará a esto
     public void VolverAlMenuPrincipal()
     {
-        Time.timeScale = 1f; // Descongelamos el tiempo
-        
-        SceneManager.LoadScene("InterfazUsuario"); // Viajamos al menú principal
-    }
-
-    // --- BOTÓN: VOLVER AL CARRUSEL DE MAPAS ---
-    public void VolverASeleccionMapa()
-    {
-        Time.timeScale = 1f; // Descongelamos el tiempo
-
-        // Dejamos una "nota secreta" para que el menú sepa qué abrir
-        PlayerPrefs.SetInt("AbrirCarrusel", 1); 
-        PlayerPrefs.Save(); // Guardamos la nota
-
-        // Viajamos a la escena del menú
+        Time.timeScale = 1f; 
         SceneManager.LoadScene("InterfazUsuario"); 
     }
 
-    // --- BOTÓN: VOLVER DE ESTADÍSTICAS A FIN DE PARTIDA ---
+    public void VolverASeleccionMapa()
+    {
+        Time.timeScale = 1f; 
+        PlayerPrefs.SetInt("AbrirCarrusel", 1); 
+        PlayerPrefs.Save(); 
+        SceneManager.LoadScene("InterfazUsuario"); 
+    }
+
     public void VolverAFinDePartida()
     {
-        pantallaEstadisticas.SetActive(false); // Apagamos las estadísticas
-        pantallaFinJuego.SetActive(true);      // Encendemos de nuevo la derrota
+        pantallaEstadisticas.SetActive(false); 
+        pantallaFinJuego.SetActive(true);      
     }
 }
