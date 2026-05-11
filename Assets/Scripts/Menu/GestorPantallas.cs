@@ -9,9 +9,9 @@ using UnityEngine.SceneManagement;
 public class GestorPantallas : MonoBehaviour
 {
     // --- NUEVA VARIABLE DE MEMORIA TEMPORAL ---
-																							
+
     public static bool sesionActiva = false;
-												 
+
 
     [Header("Conecta tus pantallas aquí")]
     public GameObject pantallaInicioSesion;
@@ -19,8 +19,8 @@ public class GestorPantallas : MonoBehaviour
     public GameObject pantallaMenu;
     public GameObject pantallaHistorial;
     public GameObject pantallaEstadisticas;
-    public GameObject pantallaSeleccionMapa; 
-    public GameObject pantallaConfiguracion; 
+    public GameObject pantallaSeleccionMapa;
+    public GameObject pantallaConfiguracion;
 
     [Header("Campos de Texto (Inputs)")]
     public TMP_InputField userLogin;
@@ -31,6 +31,12 @@ public class GestorPantallas : MonoBehaviour
     [Header("Configuración del Historial")]
     public GameObject prefabTarjeta;
     public Transform contenedorContent;
+
+    [Header("Notificación de Error")]
+    public GameObject panelError;
+    public TMP_Text txtMensajeError;
+    public float tiempoAvisoError = 3f;
+    private Coroutine rutinaErrorActiva;
 
     [Header("Textos de Estadísticas")]
     public TMP_Text txtDanoRecibido;
@@ -93,11 +99,11 @@ public class GestorPantallas : MonoBehaviour
         pantallaConfiguracion.SetActive(true);
     }
 
-												  
+
     public void CerrarSesion()
     {
         Debug.Log("Cerrando sesión y borrando memoria temporal...");
-        sesionActiva = false; 
+        sesionActiva = false;
         IrAInicioSesion();
     }
 
@@ -109,8 +115,8 @@ public class GestorPantallas : MonoBehaviour
         pantallaHistorial.SetActive(false);
         pantallaEstadisticas.SetActive(false);
         pantallaSeleccionMapa.SetActive(false);
-        
-        if (pantallaConfiguracion != null) pantallaConfiguracion.SetActive(false); 
+
+        if (pantallaConfiguracion != null) pantallaConfiguracion.SetActive(false);
     }
 
     // ==========================================
@@ -119,25 +125,28 @@ public class GestorPantallas : MonoBehaviour
 
     void Start()
     {
-		// 1. Comprueba si venimos de jugar un nivel											
+
+        if (panelError != null) panelError.SetActive(false);
+
+        // 1. Comprueba si venimos de jugar un nivel                                            
         if (PlayerPrefs.GetInt("AbrirCarrusel", 0) == 1)
         {
             PlayerPrefs.SetInt("AbrirCarrusel", 0);
             DesactivarTodasLasPantallas();
-            pantallaSeleccionMapa.SetActive(true); 
+            pantallaSeleccionMapa.SetActive(true);
         }
-		// 2. Comprueba la memoria RAM (Variable estática)												   
+        // 2. Comprueba la memoria RAM (Variable estática)                                                 
         else if (sesionActiva == true)
         {
             Debug.Log("✓ Sesión activa en memoria RAM. Saltando al Menú Principal.");
             DesactivarTodasLasPantallas();
             pantallaMenu.SetActive(true);
         }
-		// 3. Si abrimos el juego por primera vez, la variable será false																  
+        // 3. Si abrimos el juego por primera vez, la variable será false                                                                 
         else
         {
             DesactivarTodasLasPantallas();
-            pantallaInicioSesion.SetActive(true); 
+            pantallaInicioSesion.SetActive(true);
         }
     }
 
@@ -147,19 +156,21 @@ public class GestorPantallas : MonoBehaviour
 
     public void ClickLoginrapido()
     {
-        IrAMenuPrincipal(); 
+        IrAMenuPrincipal();
     }
 
     public void ClickJugar()
     {
         DesactivarTodasLasPantallas();
-        pantallaSeleccionMapa.SetActive(true); 
+        pantallaSeleccionMapa.SetActive(true);
     }
-    
+
     public void ClickLogin()
     {
-        if (string.IsNullOrEmpty(userLogin.text) || string.IsNullOrEmpty(passLogin.text)) {
+        if (string.IsNullOrEmpty(userLogin.text) || string.IsNullOrEmpty(passLogin.text))
+        {
             Debug.LogWarning("Por favor, rellena todos los campos.");
+            MostrarError(GestorIdiomas.ObtenerErrorCamposVacios()); // MODIFICADO
             return;
         }
 
@@ -168,7 +179,51 @@ public class GestorPantallas : MonoBehaviour
 
     public void ClickRegistro()
     {
+        // MODIFICADO: Añadida la comprobación de campos vacíos al registrar
+        if (string.IsNullOrEmpty(userRegister.text) || string.IsNullOrEmpty(passRegister.text))
+        {
+            Debug.LogWarning("Por favor, rellena todos los campos.");
+            MostrarError(GestorIdiomas.ObtenerErrorCamposVacios());
+            return;
+        }
+
         StartCoroutine(EnviarPeticion("registro", userRegister.text, passRegister.text));
+    }
+
+    // ==========================================
+    // FUNCIONES DEL AVISO DE ERROR (MULTIUSOS)
+    // ==========================================
+    
+    // MODIFICADO: Ahora recibe el texto exacto que debe mostrar
+    public void MostrarError(string mensajeTraducido)
+    {
+        if (panelError != null) panelError.SetActive(true);
+        
+        if (txtMensajeError != null)
+        {
+            txtMensajeError.text = mensajeTraducido;
+        }
+
+        // Si ya hay una cuenta atrás en marcha, la detenemos para empezar de cero
+        if (rutinaErrorActiva != null)
+        {
+            StopCoroutine(rutinaErrorActiva);
+        }
+        
+        // Iniciamos el temporizador
+        rutinaErrorActiva = StartCoroutine(OcultarErrorAutomatico());
+    }
+
+    private System.Collections.IEnumerator OcultarErrorAutomatico()
+    {
+        // Esperamos los segundos configurados
+        yield return new WaitForSeconds(tiempoAvisoError);
+
+        // Apagamos el panel
+        if (panelError != null)
+        {
+            panelError.SetActive(false);
+        }
     }
 
     // ==========================================
@@ -177,7 +232,8 @@ public class GestorPantallas : MonoBehaviour
 
     IEnumerator EnviarPeticion(string accion, string user, string pass)
     {
-        AuthRequest datos = new AuthRequest {
+        AuthRequest datos = new AuthRequest
+        {
             nickname = user,
             contrasena = pass,
             accion = accion
@@ -197,6 +253,9 @@ public class GestorPantallas : MonoBehaviour
             if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
             {
                 Debug.LogError("Error de Red/DNS: " + request.error);
+                // MODIFICADO: Decide qué error mostrar según la acción
+                if (accion == "registro") MostrarError(GestorIdiomas.ObtenerErrorRegistro());
+                else MostrarError(GestorIdiomas.ObtenerErrorLogin());
             }
             else
             {
@@ -205,7 +264,7 @@ public class GestorPantallas : MonoBehaviour
                     if (accion == "registro") IrAInicioSesion();
                     else
                     {
-						 // Encendemos la variable en la RAM tras loguearnos con éxito															  
+                        // Encendemos la variable en la RAM tras loguearnos con éxito                                                             
                         sesionActiva = true;
 
                         if (GestorDatosPartida.instancia != null)
@@ -219,7 +278,15 @@ public class GestorPantallas : MonoBehaviour
                         }
 
                         IrAMenuPrincipal();
-                    } 
+                    }
+                }
+                else
+                {
+                    // Si AWS nos devuelve un 401, 404, etc (contraseña mal, usuario no existe)
+                    Debug.LogWarning("Respuesta del servidor no válida (Ej. Contraseña incorrecta)");
+                    // MODIFICADO: Decide qué error mostrar según la acción
+                    if (accion == "registro") MostrarError(GestorIdiomas.ObtenerErrorRegistro());
+                    else MostrarError(GestorIdiomas.ObtenerErrorLogin());
                 }
             }
         }
@@ -256,14 +323,16 @@ public class GestorPantallas : MonoBehaviour
     // ==========================================
 
     [System.Serializable]
-    public class AuthRequest {
+    public class AuthRequest
+    {
         public string nickname;
         public string contrasena;
         public string accion;
     }
 
     [System.Serializable]
-    public class PartidaData{
+    public class PartidaData
+    {
         public int id_partida;
         public string fecha;
         public string estado;
@@ -274,7 +343,8 @@ public class GestorPantallas : MonoBehaviour
     }
 
     [System.Serializable]
-    public class RespuestaAWS {
+    public class RespuestaAWS
+    {
         public string status;
         public int id_user;
         public List<PartidaData> partidas;

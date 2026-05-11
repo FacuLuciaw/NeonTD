@@ -23,6 +23,8 @@ public class MenuPrincipal : MonoBehaviour
         Debug.Log("Abriendo el menú de opciones...");
     }
 
+
+    // NO BORRAR
     // Función para el botón Salir (El rojo)
     public void SalirDelJuego()
     {

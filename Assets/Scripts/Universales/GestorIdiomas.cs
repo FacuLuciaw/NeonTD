@@ -22,14 +22,12 @@ public class GestorIdiomas : MonoBehaviour
     public TMP_Text txtBtnEmpezar;
     public TMP_Text txtBtnVender;
 
-    // --- NUEVO: PANTALLA FIN DE PARTIDA / ESTADÍSTICAS ---
     [Header("Pantalla: Fin de Partida")]
     public TMP_Text txtBtnModoInfinito;
-    public TMP_Text txtBtnNuevaPartidaFin; // Le pongo "Fin" para no confundirlo con el del menú principal
+    public TMP_Text txtBtnNuevaPartidaFin; 
     public TMP_Text txtBtnEstadisticas;
     public TMP_Text txtBtnMenuPrincipal;
     public TMP_Text txtTituloEstadisticas;
-    // ------------------------------------------------------
 
     [Header("Etiquetas repetidas")]
     public TMP_Text[] listaTxtUsuario;
@@ -84,7 +82,7 @@ public class GestorIdiomas : MonoBehaviour
     {
         int idioma = PlayerPrefs.GetInt("IdiomaActual", 0);
 
-        if (idioma == 0) // --- ESPAÑOL ---
+        if (idioma == 0)
         {
             if (txtTituloHistorial != null) txtTituloHistorial.text = "Historial";
             if (txtTituloConfiguracion != null) txtTituloConfiguracion.text = "Configuración";
@@ -111,7 +109,6 @@ public class GestorIdiomas : MonoBehaviour
             if (txtBtnEmpezar != null) txtBtnEmpezar.text = "Empezar";
             if (txtBtnVender != null) txtBtnVender.text = "Vender";
 
-            // --- TRADUCCIÓN FIN DE PARTIDA ---
             if (txtBtnModoInfinito != null) txtBtnModoInfinito.text = "Modo Infinito";
             if (txtBtnNuevaPartidaFin != null) txtBtnNuevaPartidaFin.text = "Nueva Partida";
             if (txtBtnEstadisticas != null) txtBtnEstadisticas.text = "Estadísticas";
@@ -125,7 +122,7 @@ public class GestorIdiomas : MonoBehaviour
             TraducirLista(listaBtnSalir, "Salir");
             TraducirLista(listaBtnCrear, "Crear");
         }
-        else // --- INGLÉS ---
+        else
         {
             if (txtTituloHistorial != null) txtTituloHistorial.text = "History";
             if (txtTituloConfiguracion != null) txtTituloConfiguracion.text = "Settings";
@@ -152,7 +149,6 @@ public class GestorIdiomas : MonoBehaviour
             if (txtBtnEmpezar != null) txtBtnEmpezar.text = "Start";
             if (txtBtnVender != null) txtBtnVender.text = "Sell";
 
-            // --- TRADUCCIÓN FIN DE PARTIDA ---
             if (txtBtnModoInfinito != null) txtBtnModoInfinito.text = "Endless Mode";
             if (txtBtnNuevaPartidaFin != null) txtBtnNuevaPartidaFin.text = "New Game";
             if (txtBtnEstadisticas != null) txtBtnEstadisticas.text = "Statistics";
@@ -209,17 +205,16 @@ public class GestorIdiomas : MonoBehaviour
         return resultadoOriginal.ToUpper(); 
     }
 
-    // --- NUEVA HERRAMIENTA PARA TÍTULO DE FIN DE PARTIDA ---
     public static string ObtenerTituloFinDePartida(string estado)
     {
         int idioma = PlayerPrefs.GetInt("IdiomaActual", 0);
-        if (idioma == 0) // ESPAÑOL
+        if (idioma == 0)
         {
             if (estado == "victoria") return "¡VICTORIA!";
             if (estado == "derrota") return "¡BASE DESTRUIDA!";
             if (estado == "rendicion") return "¡TE HAS RENDIDO!";
         }
-        else // INGLÉS
+        else
         {
             if (estado == "victoria") return "VICTORY!";
             if (estado == "derrota") return "BASE DESTROYED!";
@@ -228,7 +223,6 @@ public class GestorIdiomas : MonoBehaviour
         return estado;
     }
 
-    // --- HERRAMIENTA PARA EL BOTÓN VENDER (DINÁMICO) ---
     public static string ObtenerTextoVenderConPrecio(int precio)
     {
         int idioma = PlayerPrefs.GetInt("IdiomaActual", 0);
@@ -236,11 +230,30 @@ public class GestorIdiomas : MonoBehaviour
         else return "Sell\n" + precio.ToString() + " Gold";
     }
 
-    // --- HERRAMIENTA PARA EL HUD DE RONDAS ---
     public static string ObtenerEtiquetaInfinita()
     {
         int idioma = PlayerPrefs.GetInt("IdiomaActual", 0);
-        // Si es español devuelve "Infinita", si es inglés devuelve "Endless"
         return (idioma == 0) ? "Infinita" : "Endless";
+    }
+
+    public static string ObtenerErrorLogin()
+    {
+        int idioma = PlayerPrefs.GetInt("IdiomaActual", 0);
+        if (idioma == 0) return "Usuario o contraseña incorrectos.";
+        else return "Invalid username or password.";
+    }
+
+    public static string ObtenerErrorRegistro()
+    {
+        int idioma = PlayerPrefs.GetInt("IdiomaActual", 0);
+        if (idioma == 0) return "El usuario ya existe.";
+        else return "Username already exists.";
+    }
+
+    public static string ObtenerErrorCamposVacios()
+    {
+        int idioma = PlayerPrefs.GetInt("IdiomaActual", 0);
+        if (idioma == 0) return "Por favor, rellena todos los campos.";
+        else return "Please fill in all fields.";
     }
 }
