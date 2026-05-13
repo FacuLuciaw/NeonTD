@@ -4,23 +4,22 @@ using UnityEngine.EventSystems;
 public class SeleccionTorre : MonoBehaviour
 {
     [Header("Referencias")]
-    public GameObject rangoVisual; // El anillo de neón que copiamos
+    public GameObject rangoVisual; 
 
-    // ¡CAMBIO!: Ahora es public para que GestorTorres sepa cuál está seleccionada
+    // Referencia compartida para que los gestores sepan qué torre está seleccionada
     public static SeleccionTorre torreSeleccionadaActual;
 
-    // --- MAGIA NUEVA: Datos de Venta ---
     [HideInInspector] public int precioPagado;
     [HideInInspector] public int indiceCatalogo;
 
-    // Esta función la llamará el Gestor justo al construir la torre
+    // Almacena el coste y el identificador del catálogo justo en el momento de la construcción para gestionar su futura venta
     public void ConfigurarDatosDeCompra(int precio, int indice)
     {
         precioPagado = precio;
         indiceCatalogo = indice;
     }
-    // -----------------------------------
 
+    // Selecciona la torre al hacer clic sobre ella, mostrando su rango visual y deseleccionando otra previa
     void OnMouseDown()
     {
         if (EventSystem.current.IsPointerOverGameObject()) return;
@@ -34,6 +33,7 @@ public class SeleccionTorre : MonoBehaviour
         torreSeleccionadaActual = this;
     }
 
+    // Oculta el indicador visual de rango cuando la torre es deseleccionada
     public void Deseleccionar()
     {
         if (rangoVisual != null)
@@ -42,6 +42,7 @@ public class SeleccionTorre : MonoBehaviour
         }
     }
 
+    // Detecta clics en cualquier otra parte de la pantalla que no sea esta torre o la UI para anular la selección
     void Update()
     {
         if (torreSeleccionadaActual == this && Input.GetMouseButtonDown(0))

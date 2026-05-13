@@ -1,43 +1,41 @@
 using UnityEngine;
-using TMPro; // Necesario para modificar los textos de la UI modernas
+using TMPro;
 
 public class GestorEconomia : MonoBehaviour
 {
-    // Esto crea un "Singleton", una forma fácil de acceder a este script desde cualquier lado
     public static GestorEconomia instancia;
 
     [Header("Dinero")]
-    public int oroActual = 15; // Empezamos con 15 para que puedas poner un par de torres al inicio
-    
-    [Tooltip("Multiplica el oro ganado. Ej: 1 = Normal, 2 = El Doble, 1.5 = 50% más")]
+    public int oroActual = 0;
     public float multiplicadorOro = 1f; 
-    
-    public TextMeshProUGUI textoOro; // El texto de la pantalla
+    public TextMeshProUGUI textoOro;
 
+    // Configura el sistema para que solo exista un gestor de economía en toda la partida
     void Awake()
     {
-        // Configuramos el Singleton
-        if (instancia == null) {
+        if (instancia == null) 
+        {
             instancia = this;
-        } else {
+        } 
+        else 
+        {
             Destroy(gameObject);
         }
     }
 
+    // Mostramos la cantidad de oro inicial en la pantalla
     void Start()
     {
         ActualizarTextoUI();
     }
 
-    // Los enemigos llamarán a esta función al morir
+    // Añade oro al total aplicando los multiplicadoress
     public void SumarOro(int cantidad)
     {
-        // Aplicamos el multiplicador y redondeamos al entero más cercano
         int cantidadFinal = Mathf.RoundToInt(cantidad * multiplicadorOro);
 
         oroActual += cantidadFinal;
         
-        // Registramos el dinero ganado en la partida usando la cantidad ya multiplicada
         if (GestorDatosPartida.instancia != null)
         {
             GestorDatosPartida.instancia.RegistrarOroGanado(cantidadFinal);
@@ -46,18 +44,17 @@ public class GestorEconomia : MonoBehaviour
         ActualizarTextoUI();
     }
 
-    // El gestor de torres usará esto para saber si somos ricos o no
+    // Comprueba si el jugador tiene suficiente dinero para comprar
     public bool PuedoComprar(int coste)
     {
         return oroActual >= coste;
     }
 
-    // El gestor de torres usará esto al colocar la torre
+    // Resta el dinero del total y lo registra
     public void RestarOro(int coste)
     {
         oroActual -= coste;
         
-        // Registramos el dinero gastado en la partida
         if (GestorDatosPartida.instancia != null)
         {
             GestorDatosPartida.instancia.RegistrarOroGastado(coste);
@@ -66,12 +63,11 @@ public class GestorEconomia : MonoBehaviour
         ActualizarTextoUI();
     }
 
-    // Se usa cuando se vende una torre (reembolso, no ganancia)
+    // Devuelve el dinero al vender una torre, ajustando el contador de gasto total
     public void ReembolsoVenta(int cantidad)
     {
         oroActual += cantidad;
         
-        // NO registramos como oro_ganado, solo restamos del oro_gastado
         if (GestorDatosPartida.instancia != null)
         {
             GestorDatosPartida.instancia.RestarOroGastado(cantidad);

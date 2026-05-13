@@ -2,61 +2,54 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Estructura principal para almacenar y gestionar los datos antes de enviarlos a la base de datos
 [Serializable]
 public class PartidaJSON
 {
-    public int id_user; // Lo obtendrías al hacer login
-    public string estado; // 'victoria', 'derrota', 'rendicion', 'infinito'
-    public string nivel;  // 'facil', 'normal', 'dificil'
+    public int id_user; 
+    public string estado; 
+    public string nivel;  
     public int dano_total_infligido;
     public int dano_total_recibido;
     public int oro_ganado;
     public int oro_gastado;
     public int rondas_completadas;
-
     
-    // Listas para las tablas intermedias (N:M)
     public List<DetalleTorre> torres = new List<DetalleTorre>();
     public List<DetalleEnemigo> enemigos = new List<DetalleEnemigo>();
     public List<string> enemigosActivos = new List<string>();
 
-    // Método para registrar una torre construida
+    // Registra una nueva torre construida o incrementa el contador si ya existe una del mismo tipo
     public void RegistrarTorre(string nombreTorre)
     {
-        // Buscamos si ya existe una torre con ese nombre
         DetalleTorre torreExistente = torres.Find(t => t.nombre == nombreTorre);
         
         if (torreExistente != null)
         {
-            // Si existe, aumentamos la cantidad
             torreExistente.cantidad++;
         }
         else
         {
-            // Si no existe, la creamos
             torres.Add(new DetalleTorre { nombre = nombreTorre, cantidad = 1 });
         }
     }
 
-    // Método para registrar un enemigo derrotado
+    // Registra un enemigo eliminado o incrementa su contador si ya se ha derrotado a uno igual
     public void RegistrarEnemigo(string nombreEnemigo)
     {
-        // Buscamos si ya existe un enemigo con ese nombre
         DetalleEnemigo enemigoExistente = enemigos.Find(e => e.nombre == nombreEnemigo);
         
         if (enemigoExistente != null)
         {
-            // Si existe, aumentamos la cantidad
             enemigoExistente.cantidad++;
         }
         else
         {
-            // Si no existe, lo creamos
             enemigos.Add(new DetalleEnemigo { nombre = nombreEnemigo, cantidad = 1 });
         }
     }
 
-    // Método para agregar un enemigo activo
+    // Añade un enemigo a la lista de entidades presentes actualmente en el mapa
     public void AgregarEnemigoActivo(string nombreEnemigo)
     {
         if (!enemigosActivos.Contains(nombreEnemigo))
@@ -65,102 +58,95 @@ public class PartidaJSON
         }
     }
 
-    // Método para remover un enemigo activo
+    // Elimina a un enemigo de la lista de entidades activas al ser destruido o llegar a la base
     public void RemoverEnemigoActivo(string nombreEnemigo)
     {
         enemigosActivos.Remove(nombreEnemigo);
     }
 
-    // Método para restar una torre (cuando se vende)
+    // Reduce el contador de una torre específica cuando el jugador la vende, o la elimina si solo quedaba una
     public void DesvincularTorre(string nombreTorre)
     {
-        // Buscamos la torre con ese nombre
         DetalleTorre torreExistente = torres.Find(t => t.nombre == nombreTorre);
         
         if (torreExistente != null)
         {
-            // Si existe y hay más de 1, restamos 1
             if (torreExistente.cantidad > 1)
             {
                 torreExistente.cantidad--;
             }
             else
             {
-                // Si solo hay 1, la eliminamos de la lista
                 torres.Remove(torreExistente);
             }
         }
     }
 
-    // Métodos para rastrear dinero ganado y gastado
+    // Suma la cantidad obtenida al registro total de oro de la partida
     public void RegistrarOroGanado(int cantidad)
     {
         oro_ganado += cantidad;
-       
     }
 
+    // Suma el coste de la torre al registro total de gastos de la partida al construir
     public void RegistrarOroGastado(int cantidad)
     {
         oro_gastado += cantidad;
-       
     }
 
-    // Método para restar oro gastado (cuando se vende una torre)
+    // Resta una cantidad del total gastado al recibir un reembolso por venta
     public void RestarOroGastado(int cantidad)
     {
         oro_gastado -= cantidad;
-        // Aseguramos que no sea negativo
         if (oro_gastado < 0) oro_gastado = 0;
     }
 
-    // Método para registrar daño recibido por la base
+    // Acumula el daño total que la base principal ha sufrido durante la partida
     public void RegistrarDanoRecibido(float cantidad)
     {
         dano_total_recibido += (int)cantidad;
-       
     }
 
-    // Método para registrar daño infligido a enemigos
+    // Acumula el daño total que las torres han causado a los enemigos
     public void RegistrarDanoInfligido(float cantidad)
     {
         dano_total_infligido += (int)cantidad;
     }
 
-    // Método para registrar una ronda completada
+    // Incrementa el contador de rondas superadas con éxito
     public void RegistrarRondaCompletada()
     {
         rondas_completadas++;
     }
 
-    // Método para establecer el resultado de la partida
+    // Actualiza el resultado de la partida (victoria, derrota, etc.) priorizando el estado infinito si está activo
     public void EstablecerEstado(string nuevoEstado)
     {
-        // Si el estado actual es "infinito", no lo cambiamos para mantenerlo en la BD
         if (estado != "infinito")
         {
             estado = nuevoEstado;
         }
     }
 
-    // Método para establecer el nivel de dificultad
+    // Guarda el nivel de dificultad en el que se está jugando
     public void EstablecerNivel(string nombreNivel)
     {
         nivel = nombreNivel;
     }
-
-    
 }
 
+// Estructura auxiliar para guardar la cantidad construida de cada tipo de torre
 [Serializable]
-public class DetalleTorre {
+public class DetalleTorre 
+{
     public string nombre;
     public int cantidad;
 }
 
+// Estructura auxiliar para guardar la cantidad eliminada de cada tipo de enemigo
 [Serializable]
-public class DetalleEnemigo {
+public class DetalleEnemigo 
+{
     public string nombre;
     public int cantidad;
 }
-
-

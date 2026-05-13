@@ -13,15 +13,13 @@ public class GestorDatosPartida : MonoBehaviour
     [Header("AWS Guardado de Partida")]
     public string savePartidaAPI = "https://q2v7qbfux6.execute-api.us-east-1.amazonaws.com/default/L_Unity_Save_TD";
 
+    // Configura el Singleton asegurando que este gestor sobreviva a las cargas de nuevas escenas
     void Awake()
     {
-        // Configuramos el Singleton para acceder desde cualquier lado
         if (instancia == null)
         {
             instancia = this;
-            // Hacemos que persista entre cambios de escena
             DontDestroyOnLoad(gameObject);
-            Debug.Log("✓ GestorDatosPartida inicializado");
         }
         else
         {
@@ -42,7 +40,7 @@ public class GestorDatosPartida : MonoBehaviour
         }
     }
 
-    // Métodos de acceso rápido
+    // --- MÉTODOS DE ACCESO RÁPIDO A LA ESTRUCTURA JSON ---
     public void RegistrarTorre(string nombreTorre) => datosPartida.RegistrarTorre(nombreTorre);
     public void DesvincularTorre(string nombreTorre) => datosPartida.DesvincularTorre(nombreTorre);
     public void RegistrarEnemigo(string nombreEnemigo) => datosPartida.RegistrarEnemigo(nombreEnemigo);
@@ -57,10 +55,9 @@ public class GestorDatosPartida : MonoBehaviour
     public void EstablecerEstado(string estado) => datosPartida.EstablecerEstado(estado);
     public void EstablecerNivel(string nombreNivel) => datosPartida.EstablecerNivel(nombreNivel);
 
-    // Método para resetear la partida al modo infinito
+    // Prepara una nueva sesión de datos preservando las torres construidas, el nivel y del jugador
     public void ResetearParaModoInfinito()
     {
-        // Guardar lo que queremos conservar antes de resetear
         int userId = datosPartida.id_user;
         string nivelActual = datosPartida.nivel;
         List<DetalleTorre> torresGuardadas = new List<DetalleTorre>();
@@ -70,21 +67,21 @@ public class GestorDatosPartida : MonoBehaviour
             torresGuardadas.Add(new DetalleTorre { nombre = torre.nombre, cantidad = torre.cantidad });
         }
 
-        // Crear nueva instancia limpia
         datosPartida = new PartidaJSON();
 
-        // Restaurar id_user, nivel y torres preservadas
         datosPartida.id_user = userId;
         datosPartida.nivel = nivelActual;
         datosPartida.estado = "infinito";
         datosPartida.torres = torresGuardadas;
     }
 
+    // Inicia la corrutina para enviar los datos a la base de datos
     public void GuardarPartidaAWS()
     {
         StartCoroutine(EnviarPartidaAWS());
     }
 
+    // Transforma los datos a formato JSON y realiza la petición POST a la API de AWS
     IEnumerator EnviarPartidaAWS()
     {
         string json = JsonUtility.ToJson(datosPartida);
@@ -97,38 +94,17 @@ public class GestorDatosPartida : MonoBehaviour
             request.SetRequestHeader("Content-Type", "application/json");
 
             yield return request.SendWebRequest();
-
-            if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
-            {
-                Debug.LogError("Error guardando partida: " + request.error);
-            }
-            else
-            {
-                Debug.Log("Partida enviada correctamente: " + request.responseCode + " | " + request.downloadHandler.text);
-            }
         }
     }
 
-    // public void ResetDatosPartida()
-    // {
-    //     //int userId = datosPartida.id_user;
-    //     datosPartida = new PartidaJSON();
-    //     //datosPartida.id_user = userId;
-    //     datosPartida.estado = string.Empty;
-    // }
-
+    // Limpia todo el progreso actual para empezar un mapa nuevo, manteniendo únicamente el ID del jugador
     public void ResetDatosPartida()
     {
-        // 1. Guardamos el ID del usuario actual antes de borrar nada
         int userId = datosPartida.id_user; 
         
-        // 2. Creamos una partida completamente en blanco
         datosPartida = new PartidaJSON();
         
-        // 3. Le devolvemos su ID de usuario para que siga logueado
         datosPartida.id_user = userId;
         datosPartida.estado = string.Empty;
     }
-
-    
 }

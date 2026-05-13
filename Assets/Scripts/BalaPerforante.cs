@@ -9,19 +9,16 @@ public class BalaPerforante : MonoBehaviour
     public float tiempoDeVida = 5f; 
     public float compensacionRotacion = -90f;
 
-    [Header("Efecto Daño Continuo")]
-    public bool aplicaDañoContinuo = false; 
-    
-    // ✅ ¡AQUÍ ESTÁ TU CHECKBOX!
-    [Tooltip("Si se marca, cada bala suma un veneno extra. Si se desmarca, solo reinicia el reloj del veneno.")]
-    public bool seAcumulaElDaño = false; 
-    
+    [Header("Efecto D.O.T.")]
+    public bool aplicaDanoContinuo = false; 
+    public bool seAcumulaElDano = false; 
     public float danoPorSegundo = 2f;
     public float duracionEfecto = 10f;
 
     private Vector2 direccionDisparo;
     private List<GameObject> enemigosGolpeados = new List<GameObject>();
 
+    // Inicializa la trayectoria del proyectil, ajusta su rotación visual y programa su destrucción automática
     public void ConfigurarDireccion(Vector2 direccion)
     {
         direccionDisparo = direccion.normalized;
@@ -32,11 +29,13 @@ public class BalaPerforante : MonoBehaviour
         Destroy(gameObject, tiempoDeVida);
     }
 
+    // Desplaza la bala de forma constante en la dirección configurada, ignorando obstáculos físicos
     void Update()
     {
         transform.Translate(direccionDisparo * velocidad * Time.deltaTime, Space.World);
     }
 
+    // Detecta colisiones, aplica el daño base y continuo, asegurando que cada enemigo sea golpeado solo una vez
     private void OnTriggerEnter2D(Collider2D colision)
     {
         LogicaEnemigo enemigo = colision.GetComponentInParent<LogicaEnemigo>();
@@ -45,19 +44,14 @@ public class BalaPerforante : MonoBehaviour
         {
             if (!enemigosGolpeados.Contains(colision.gameObject))
             {
-                // 1. Daño del impacto inicial
-                enemigo.RecibirDaño(dano);
+                enemigo.RecibirDano(dano);
 
-                // 2. Aplicar daño continuo pasándole la nueva Checkbox
-                if (aplicaDañoContinuo)
+                if (aplicaDanoContinuo)
                 {
-                    enemigo.AplicarDañoContinuo(danoPorSegundo, duracionEfecto, seAcumulaElDaño);
+                    enemigo.AplicarDanoContinuo(danoPorSegundo, duracionEfecto, seAcumulaElDano);
                 }
 
-                // 3. Lo anotamos en la lista negra para no volver a darle con ESTA misma bala
                 enemigosGolpeados.Add(colision.gameObject); 
-                
-                Debug.Log("Impacto perforante en: " + colision.name);
             }
         }
     }

@@ -403,7 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42d249a455be9ca4db35406909622328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LogicaTorre
-  "ca\xF1onGiratorio": {fileID: 1157311590718106446}
+  canonGiratorio: {fileID: 1157311590718106446}
   puntoDeDisparo: {fileID: 7865339879541028652}
   balaPrefab: {fileID: 6614674476980737235, guid: d9efbd3de41cf114ab03dd2d7719b8f7, type: 3}
   cadenciaDisparo: 1.1

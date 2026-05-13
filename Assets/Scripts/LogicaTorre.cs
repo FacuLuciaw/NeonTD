@@ -1,98 +1,113 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class LogicaTorre : MonoBehaviour {
+public class LogicaTorre : MonoBehaviour 
+{
     [Header("Referencias Visuales")]
-    public Transform cañonGiratorio; // Arrastraremos el objeto Cañon aquí
-    public Transform puntoDeDisparo; // Arrastraremos el objeto PuntoDeDisparo aquí
+    public Transform canonGiratorio; 
+    public Transform puntoDeDisparo; 
 
     [Header("Configuración Disparo")]
     public GameObject balaPrefab;
     public float cadenciaDisparo = 1f;
     private float tiempoSiguienteDisparo;
     
-    // Este valor ajusta el ángulo del cañón. 
-    // Si tu dibujo del cañón apunta hacia arriba por defecto, pon -90. 
-    // Si apunta hacia la derecha, pon 0.
     public float compensacionRotacion = -90f; 
 
     private Transform objetivoActual;
     public List<GameObject> enemigosEnRango = new List<GameObject>();
 
-    void Update() {
+    // Actualiza el estado de la torre en cada frame: limpia objetivos eliminados, busca nuevos y gestiona el disparo
+    void Update() 
+    {
         LimpiarLista(); 
         ActualizarObjetivo(); 
 
-        if (objetivoActual != null) {
+        if (objetivoActual != null) 
+        {
             RotarHaciaObjetivo();
 
-            if (Time.time >= tiempoSiguienteDisparo) {
+            if (Time.time >= tiempoSiguienteDisparo) 
+            {
                 Disparar();
                 
-                // Le sumamos el tiempo normal para el siguiente disparo
                 tiempoSiguienteDisparo += cadenciaDisparo; 
 
-                // --- LA SOLUCIÓN AL DOBLE DISPARO ---
-                // Si aún con la suma seguimos por detrás del tiempo actual (porque estuvo inactiva mucho rato),
-                // forzamos a que el SIGUIENTE disparo ocurra exactamente dentro de '1 cadencia' a partir de ahora.
-                if (tiempoSiguienteDisparo < Time.time) {
+                // Previene ráfagas instantáneas si la torre pasó mucho tiempo inactiva sin enemigos
+                if (tiempoSiguienteDisparo < Time.time) 
+                {
                     tiempoSiguienteDisparo = Time.time + cadenciaDisparo;
                 }
             }
         }
     }
 
-    void RotarHaciaObjetivo() {
-        if (cañonGiratorio == null) return;
+    // Calcula el ángulo hacia el objetivo y rota la cabeza de la torre para apuntar
+    void RotarHaciaObjetivo() 
+    {
+        if (canonGiratorio == null) return;
 
-        // Calculamos la dirección matemática hacia el enemigo
-        Vector2 direccion = objetivoActual.position - cañonGiratorio.position;
-        
-        // Convertimos esa dirección en un ángulo
+        Vector2 direccion = objetivoActual.position - canonGiratorio.position;
         float angulo = Mathf.Atan2(direccion.y, direccion.x) * Mathf.Rad2Deg;
         
-        // Aplicamos la rotación suavemente
         Quaternion rotacionDeseada = Quaternion.Euler(new Vector3(0, 0, angulo + compensacionRotacion));
-        cañonGiratorio.rotation = Quaternion.Lerp(cañonGiratorio.rotation, rotacionDeseada, Time.deltaTime * 10f); // El 10f es la velocidad de giro
+        canonGiratorio.rotation = Quaternion.Lerp(canonGiratorio.rotation, rotacionDeseada, Time.deltaTime * 10f); 
     }
 
-    void Disparar() {
-        if (balaPrefab != null && objetivoActual != null && puntoDeDisparo != null) {
-            // Ahora la bala sale desde la punta del cañón, no desde el centro de la base
+    // Instancia el proyectil en el punto de disparo del cañón y le transfiere la referencia del objetivo actual
+    void Disparar() 
+    {
+        if (balaPrefab != null && objetivoActual != null && puntoDeDisparo != null) 
+        {
             GameObject nuevaBala = Instantiate(balaPrefab, puntoDeDisparo.position, puntoDeDisparo.rotation);
             nuevaBala.GetComponent<LogicaBala>().objetivo = objetivoActual;
         }
     }
 
-    void ActualizarObjetivo() {
+    // Examina la lista de enemigos en rango y asigna el primero como objetivo prioritario
+    void ActualizarObjetivo() 
+    {
         if (objetivoActual != null) return;
 
         GameObject candidato = null;
-        foreach (GameObject enemigo in enemigosEnRango) {
-            if (enemigo != null) {
+        foreach (GameObject enemigo in enemigosEnRango) 
+        {
+            if (enemigo != null) 
+            {
                 candidato = enemigo; 
                 break; 
             }
         }
+        
         if (candidato != null) objetivoActual = candidato.transform;
     }
 
-    void OnTriggerEnter2D(Collider2D otro) {
-        if (otro.CompareTag("Enemigo")) {
+    // Detecta a los enemigos que entran en el área de ataque y los añade a la lista de objetivos
+    void OnTriggerEnter2D(Collider2D otro) 
+    {
+        if (otro.CompareTag("Enemigo")) 
+        {
             enemigosEnRango.Add(otro.gameObject);
         }
     }
 
-    void OnTriggerExit2D(Collider2D otro) {
-        if (otro.CompareTag("Enemigo")) {
+    // Elimina de la lista a los enemigos que salen del área 
+    void OnTriggerExit2D(Collider2D otro) 
+    {
+        if (otro.CompareTag("Enemigo")) 
+        {
             enemigosEnRango.Remove(otro.gameObject);
-            if (objetivoActual == otro.transform) {
+            
+            if (objetivoActual == otro.transform) 
+            {
                 objetivoActual = null; 
             }
         }
     }
 
-    void LimpiarLista() {
+    // Limpia las referencias nulas de la lista causadas por enemigos destruidos antes de salir del rango
+    void LimpiarLista() 
+    {
         enemigosEnRango.RemoveAll(item => item == null);
     }
 }

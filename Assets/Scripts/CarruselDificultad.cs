@@ -23,6 +23,7 @@ public class CarruselDificultad : MonoBehaviour
     private int indiceActual = 0;
     private string dificultad;
 
+    // Inicializa el carrusel mostrando el primer mapa 
     void Start()
     {
         if (mapasDisponibles.Length > 0)
@@ -31,6 +32,7 @@ public class CarruselDificultad : MonoBehaviour
         }
     }
 
+    // Avanza al siguiente mapa de la lista y vuelve al principio si sobrepasa el límite
     public void SiguienteMapa()
     {
         indiceActual++; 
@@ -43,6 +45,7 @@ public class CarruselDificultad : MonoBehaviour
         ActualizarPantalla();
     }
 
+    // Retrocede al mapa anterior y pasa al último de la lista si se encuentra en el primero
     public void MapaAnterior()
     {
         indiceActual--; 
@@ -55,46 +58,36 @@ public class CarruselDificultad : MonoBehaviour
         ActualizarPantalla();
     }
 
-    // --- FUNCIÓN QUE CAMBIA LOS GRÁFICOS ---
+    // Actualiza los elementos visuales del menú principal, solicitando la traducción del texto
     public void ActualizarPantalla()
     {
-        // --- ¡MAGIA DEL IDIOMA APLICADA AQUÍ! ---
-        // Traducimos visualmente la palabra ANTES de ponerla en la pantalla
         txtDificultad.text = GestorIdiomas.ObtenerDificultadTraducida(mapasDisponibles[indiceActual].nombreDificultad);
-        // ----------------------------------------
-        
         imgMapaFondo.sprite = mapasDisponibles[indiceActual].imagenDelMapa;
     }
 
+    // Carga el nivel seleccionado
     public void CargarMapaSeleccionado()
     {
         string escenaACargar = mapasDisponibles[indiceActual].nombreEscenaUnity;
-
-        // OJO: Guardamos el nombre ORIGINAL (sin traducir) para mandarlo limpio a AWS
         dificultad = mapasDisponibles[indiceActual].nombreDificultad;
 
         if (GestorDatosPartida.instancia != null)
         {
             GestorDatosPartida.instancia.ResetDatosPartida();
-            Debug.Log("✓ Datos de partida reiniciados antes de cargar nueva partida");
         }
 
         SceneManager.sceneLoaded += AlCargarEscena;
         
-        Debug.Log("Cargando nivel: " + escenaACargar);
-        
         Time.timeScale = 1f; 
         SceneManager.LoadScene(escenaACargar);
-
     }
 
+    // Registra la dificultad en la base de datos
     private void AlCargarEscena(Scene escena, LoadSceneMode modo) 
     {
-        if (GestorDatosPartida.instancia != null){
+        if (GestorDatosPartida.instancia != null)
+        {
             GestorDatosPartida.instancia.EstablecerNivel(dificultad);
-            Debug.Log("✓ Dificultad registrada en base de datos tras carga: " + dificultad);
-        } else{
-            Debug.LogError("✗ El Gestor sigue sin aparecer incluso tras cargar escena");
         }
 
         SceneManager.sceneLoaded -= AlCargarEscena;

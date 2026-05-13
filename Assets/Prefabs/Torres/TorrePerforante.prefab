@@ -466,7 +466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LogicaTorre5
   prefabBala: {fileID: 6614674476980737235, guid: bf6f4e3e121b9054c93fa0409788d923, type: 3}
   puntoDisparo: {fileID: 7865339879541028652}
-  "ca\xF1on": {fileID: 1157311590718106446}
+  canon: {fileID: 1157311590718106446}
   cadencia: 0.75
   compensacionRotacion: 90
 --- !u!1 &9006693342743176364

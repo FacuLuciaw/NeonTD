@@ -26,12 +26,11 @@ public class LogicaEnemigo : MonoBehaviour
     public int oroAlMorir = 2; 
 
     [Header("Identificación")]
-    public string nombreEnemigo = "Enemigo"; // Nombre específico del enemigo
+    public string nombreEnemigo = "Enemigo"; 
 
-    // --- NUEVA VARIABLE PARA EL VENENO ---
-    // Aquí el enemigo guardará el veneno único para poder borrarlo si le disparan otra vez
     private Coroutine rutinaVenenoUnico; 
 
+    // Configura la salud inicial del enemigo y ajusta su barra de vida visual
     void Start()
     {
         vidaActual = vidaMax;
@@ -42,6 +41,7 @@ public class LogicaEnemigo : MonoBehaviour
         }
     }
 
+    // Gestiona el movimiento constante y aplica el daño de las torres Tesla si está sobre una
     void Update()
     {
         MoverEnemigo();
@@ -51,8 +51,7 @@ public class LogicaEnemigo : MonoBehaviour
             temporizadorChoqueTesla += Time.deltaTime;
             if (temporizadorChoqueTesla >= 1f)
             {
-                RecibirDaño(danoTeslaActual);
-                // Restamos 1 segundo exacto para mantener los milisegundos que nos hayamos pasado
+                RecibirDano(danoTeslaActual);
                 temporizadorChoqueTesla -= 1f; 
             }
         }
@@ -62,11 +61,11 @@ public class LogicaEnemigo : MonoBehaviour
         }
     }
 
+    // Desplaza al enemigo hacia el siguiente WP. Si llega al final desaparece
     void MoverEnemigo()
     {
         if (indicePunto >= puntos.Length)
         {
-            // Remover el enemigo de activos cuando escapa
             if (GestorDatosPartida.instancia != null)
             {
                 GestorDatosPartida.instancia.RemoverEnemigoActivo(nombreEnemigo);
@@ -83,21 +82,21 @@ public class LogicaEnemigo : MonoBehaviour
         }
     }
 
-    public void RecibirDaño(float cantidad)
+    // Reduce la salud del enemigo, actualiza su barra visual y comprueba si debe morir
+    public void RecibirDano(float cantidad)
     {
         vidaActual -= cantidad;
         if (barraDeVida != null) barraDeVida.value = vidaActual;
         if (vidaActual <= 0) Morir();
     }
 
+    // Ejecuta la lógica de eliminación: registra estadísticas, otorga dinero y destruye el objeto
     void Morir()
     {
-        // Registrar la muerte del enemigo
         if (GestorDatosPartida.instancia != null)
         {
             GestorDatosPartida.instancia.RegistrarEnemigo(nombreEnemigo);
             GestorDatosPartida.instancia.RemoverEnemigoActivo(nombreEnemigo);
-            // Registrar el daño infligido (vida máxima porque lo eliminamos completamente)
             GestorDatosPartida.instancia.RegistrarDanoInfligido(vidaMax);
         }
 
@@ -105,6 +104,7 @@ public class LogicaEnemigo : MonoBehaviour
         Destroy(gameObject);
     }
 
+    // Detecta la colisión con la base principal para infligir daño 
     private void OnTriggerEnter2D(Collider2D colision)
     {
         if (colision.CompareTag("Base"))
@@ -114,11 +114,9 @@ public class LogicaEnemigo : MonoBehaviour
             {
                 baseScript.RecibirDano(danoABase);
 
-                // Remover el enemigo de activos ya que llegó a la base
                 if (GestorDatosPartida.instancia != null)
                 {
                     GestorDatosPartida.instancia.RemoverEnemigoActivo(nombreEnemigo);
-                    // Registrar el daño infligido (lo que se le quitó de vida, no la vida restante)
                     float danoInfligido = vidaMax - vidaActual;
                     GestorDatosPartida.instancia.RegistrarDanoInfligido(danoInfligido);
                 }
@@ -128,6 +126,7 @@ public class LogicaEnemigo : MonoBehaviour
         }
     }
 
+    // Reduce la velocidad del enemigo e inicia el ciclo de daño al entrar en el rango de una torre Tesla
     public void EntrarEnTesla(float multiplicador, float danoQueHaceLaTorre)
     {
         zonasTeslaPisadas++;
@@ -141,6 +140,7 @@ public class LogicaEnemigo : MonoBehaviour
         }
     }
 
+    // Restaura la velocidad original del enemigo una vez que sale de todas las zonas Tesla activas
     public void SalirDeTesla()
     {
         zonasTeslaPisadas--;
@@ -152,47 +152,42 @@ public class LogicaEnemigo : MonoBehaviour
         }
     }
 
-    // --- SISTEMA DE DAÑO CONTINUO (AHORA CON CHECKBOX) ---
-    public void AplicarDañoContinuo(float dps, float duracion, bool seAcumula)
+    // Gestiona si el efecto de D.O.T. se acumula en múltiples instancias o si reinicia el actual
+    public void AplicarDanoContinuo(float dps, float duracion, bool seAcumula)
     {
         if (seAcumula)
         {
-            // Si SÍ se acumula, simplemente lanzamos uno nuevo sin importar los demás (Como estaba antes)
-            StartCoroutine(RutinaDañoContinuo(dps, duracion));
+            StartCoroutine(RutinaDanoContinuo(dps, duracion));
         }
         else
         {
-            // Si NO se acumula, miramos si ya estaba envenenado...
             if (rutinaVenenoUnico != null)
             {
-                // Si lo estaba, paramos ese veneno viejo...
                 StopCoroutine(rutinaVenenoUnico);
             }
-            // ...y lanzamos el nuevo, guardándolo en la memoria
-            rutinaVenenoUnico = StartCoroutine(RutinaDañoContinuo(dps, duracion));
+            rutinaVenenoUnico = StartCoroutine(RutinaDanoContinuo(dps, duracion));
         }
     }
 
-    private System.Collections.IEnumerator RutinaDañoContinuo(float dps, float duracion)
-{
-    float tiempoTotalPasado = 0f;
-    float cronometroInterno = 0f;
-
-    while (tiempoTotalPasado < duracion)
+    // Corrutina que aplica D.O.T.
+    private System.Collections.IEnumerator RutinaDanoContinuo(float dps, float duracion)
     {
-        // Acumulamos el tiempo del frame actual
-        float delta = Time.deltaTime;
-        tiempoTotalPasado += delta;
-        cronometroInterno += delta;
+        float tiempoTotalPasado = 0f;
+        float cronometroInterno = 0f;
 
-        // Cada vez que acumulamos 1 segundo...
-        if (cronometroInterno >= 1f)
+        while (tiempoTotalPasado < duracion)
         {
-            RecibirDaño(dps);
-            cronometroInterno -= 1f; // Restamos el segundo y mantenemos la precisión
-        }
+            float delta = Time.deltaTime;
+            tiempoTotalPasado += delta;
+            cronometroInterno += delta;
 
-        yield return null; // Esperamos al siguiente frame
+            if (cronometroInterno >= 1f)
+            {
+                RecibirDano(dps);
+                cronometroInterno -= 1f; 
+            }
+
+            yield return null; 
+        }
     }
-}
 }

@@ -6,7 +6,7 @@ public class LogicaTorre5 : MonoBehaviour
     [Header("Referencias")]
     public GameObject prefabBala;
     public Transform puntoDisparo;
-    public Transform cañon; 
+    public Transform canon; 
 
     [Header("Configuración")]
     public float cadencia = 2f;
@@ -14,55 +14,47 @@ public class LogicaTorre5 : MonoBehaviour
     
     private float temporizador;
     
-    // Lista para saber quién está dentro del Circle Collider
     private List<Transform> enemigosEnRango = new List<Transform>();
     private Transform objetivoActual;
 
+    // Gestiona la torre: eliminación de objetivos, control del tiempo y disparo
     void Update()
     {
-        // 1. Limpiamos la lista 
         enemigosEnRango.RemoveAll(enemigo => enemigo == null);
 
-        // 2. El temporizador avanza siempre
         temporizador += Time.deltaTime;
 
-        // --- EL TOPE ANTI-AMETRALLADORA ---
-        // Si ya cargó la bala, no le dejamos acumular tiempo infinito. Se queda lista (al máximo).
+        // Limita el temporizador a la cadencia máxima para evitar disparos instantáneos acumulados tras periodos de inactividad
         if (temporizador > cadencia) 
         {
             temporizador = cadencia;
         }
 
-        // 3. Revisamos a quién disparar
         ActualizarObjetivo();
 
         if (objetivoActual != null)
         {
-            // Apuntamos
-            Vector2 direccion = objetivoActual.position - cañon.position;
+            Vector2 direccion = objetivoActual.position - canon.position;
             float angulo = Mathf.Atan2(direccion.y, direccion.x) * Mathf.Rad2Deg;
-            cañon.rotation = Quaternion.Euler(new Vector3(0, 0, angulo + compensacionRotacion));
+            canon.rotation = Quaternion.Euler(new Vector3(0, 0, angulo + compensacionRotacion));
 
-            // Disparamos
             if (temporizador >= cadencia)
             {
                 Disparar();
                 
-                // Restamos la cadencia para conservar los decimales sobrantes y ser precisos en x2
                 temporizador -= cadencia; 
             }
         }
     }
 
+    // Mantiene el enfoque en el objetivo actual si sigue en rango, o selecciona el primero disponible
     void ActualizarObjetivo()
     {
-        // Si ya tenemos un objetivo y SIGUE en nuestra lista (dentro del collider), nos lo quedamos
         if (objetivoActual != null && enemigosEnRango.Contains(objetivoActual))
         {
             return; 
         }
 
-        // Si no tenemos objetivo (o el anterior salió/murió), cogemos al primero de la lista
         if (enemigosEnRango.Count > 0)
         {
             objetivoActual = enemigosEnRango[0];
@@ -73,6 +65,7 @@ public class LogicaTorre5 : MonoBehaviour
         }
     }
 
+    // Instancia el proyectil y le transfiere la dirección hacia el objetivo
     void Disparar()
     {
         GameObject nuevaBala = Instantiate(prefabBala, puntoDisparo.position, Quaternion.identity);
@@ -85,7 +78,7 @@ public class LogicaTorre5 : MonoBehaviour
         }
     }
 
-    // --- EL RADAR FÍSICO (Requiere Circle Collider 2D con 'Is Trigger') ---
+    // Registra a los enemigos que entran dentro del área 
     private void OnTriggerEnter2D(Collider2D colision)
     {
         if (colision.CompareTag("Enemigo"))
@@ -94,6 +87,7 @@ public class LogicaTorre5 : MonoBehaviour
         }
     }
 
+    // Elimina de los registros a los enemigos que salen del área
     private void OnTriggerExit2D(Collider2D colision)
     {
         if (colision.CompareTag("Enemigo"))

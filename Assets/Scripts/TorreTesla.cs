@@ -15,20 +15,19 @@ public class TorreTesla : MonoBehaviour
 
     private List<LogicaEnemigo> enemigosEnRango = new List<LogicaEnemigo>();
 
-    // Memoria compartida de baldosas
     public static List<Vector2> casillasInfectadasGlobales = new List<Vector2>();
     private List<Vector2> misCasillasInfectadas = new List<Vector2>();
 
-    // --- MAGIA NUEVA: El grupo de comunicación de las Teslas ---
     public static List<TorreTesla> todasLasTeslas = new List<TorreTesla>();
 
+    // Registra la torre en el grupo de comunicación y empieza el escaneo del terreno
     void Start()
     {
-        // Al nacer, me uno al grupo
         todasLasTeslas.Add(this);
         EscanearYGenerarEfectos();
     }
 
+    // Analiza las casillas adyacentes y genera el efecto visual si no están ocupadas por otra torre Tesla
     public void EscanearYGenerarEfectos()
     {
         for (int x = -1; x <= 1; x++)
@@ -46,7 +45,6 @@ public class TorreTesla : MonoBehaviour
                 {
                     Vector2 posRedondeada = new Vector2(Mathf.Round(posicionCasilla.x), Mathf.Round(posicionCasilla.y));
 
-                    // Si nadie ha reclamado esta casilla, me la quedo yo y la pinto
                     if (!casillasInfectadasGlobales.Contains(posRedondeada))
                     {
                         casillasInfectadasGlobales.Add(posRedondeada);
@@ -63,6 +61,7 @@ public class TorreTesla : MonoBehaviour
         }
     }
 
+    // Aplica el efecto de ralentización y daño a los enemigos que entran en el área
     private void OnTriggerEnter2D(Collider2D colision)
     {
         LogicaEnemigo enemigo = colision.GetComponentInParent<LogicaEnemigo>();
@@ -74,6 +73,7 @@ public class TorreTesla : MonoBehaviour
         }
     }
 
+    // Libera a los enemigos del efecto Tesla al salir del área
     private void OnTriggerExit2D(Collider2D colision)
     {
         LogicaEnemigo enemigo = colision.GetComponentInParent<LogicaEnemigo>();
@@ -84,25 +84,21 @@ public class TorreTesla : MonoBehaviour
         }
     }
 
+    // Gestiona la limpieza de registros al vender la torre y notifica a las demás para que cubran huecos visuales
     void OnDestroy()
     {
-        // 1. Me salgo del grupo de comunicación
         todasLasTeslas.Remove(this);
 
-        // 2. Limpio mis baldosas de la memoria global
         foreach (Vector2 baldosa in misCasillasInfectadas)
         {
             casillasInfectadasGlobales.Remove(baldosa);
         }
 
-        // 3. Libero a los enemigos
         foreach (LogicaEnemigo enemigo in enemigosEnRango)
         {
             if (enemigo != null) enemigo.SalirDeTesla();
         }
 
-        // --- MAGIA NUEVA: Aviso a mis compañeras ---
-        // Les digo a todas las torres que quedan que revisen si he dejado huecos en su zona
         foreach (TorreTesla torre in todasLasTeslas)
         {
             if (torre != null)
