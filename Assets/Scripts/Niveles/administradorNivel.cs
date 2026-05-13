@@ -91,9 +91,10 @@ public class AdministradorNivel : MonoBehaviour
         Time.timeScale = 0f; 
     }
 
-    public void MostrarVictoria()
+public void MostrarVictoria()
     {
-        if (juegoFinalizado) return;
+        if (juegoFinalizado || enModoInfinito) return; 
+        
         juegoFinalizado = true;
 
         if (GestorDatosPartida.instancia != null)
