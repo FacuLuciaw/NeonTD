@@ -12,6 +12,10 @@ public class GestorConfiguracion : MonoBehaviour
     public Slider sliderMusica;
     public Slider sliderFX;
 
+    [Header("Pantallas de Ayuda")]
+    public GameObject pantallaBestiario;
+    public GameObject pantallaCatalogoTorres;
+
     private const float MIN_VOL = 0.0001f;
 
     void OnEnable()
@@ -19,6 +23,9 @@ public class GestorConfiguracion : MonoBehaviour
         // Modificar sliders segun el volumen
         if (sliderMusica != null) sliderMusica.value = PlayerPrefs.GetFloat("GuardadoVolMusica", 0.5f);
         if (sliderFX != null) sliderFX.value = PlayerPrefs.GetFloat("GuardadoVolFXs", 0.5f);
+
+        if (pantallaBestiario != null) pantallaBestiario.SetActive(false);
+        if (pantallaCatalogoTorres != null) pantallaCatalogoTorres.SetActive(false);
     }
 
     public void CambiarVolumenMusica(float valorSlider)
@@ -47,6 +54,22 @@ public class GestorConfiguracion : MonoBehaviour
             case 1:
                 Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
                 break;
+        }
+    }
+
+    public void AbrirVentanaEmergente(GameObject ventana)
+    {
+        if (ventana != null)
+        {
+            ventana.SetActive(true);
+        }
+    }
+
+    public void CerrarVentanaEmergente(GameObject ventana)
+    {
+        if (ventana != null)
+        {
+            ventana.SetActive(false);
         }
     }
 }
