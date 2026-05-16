@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 02187c3248bec0c44a4c3068b7d6e254
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - balaPrefab: {fileID: 6614674476980737235, guid: d9efbd3de41cf114ab03dd2d7719b8f7,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

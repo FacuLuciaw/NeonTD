@@ -7,7 +7,7 @@
 
 ## Descripción
 
-`Neon Defender` es un proyecto de juego tipo Tower Defense creado en Unity. Está ambientado en un universo futurista con identidad visual propia, fundamentada en una estética cyberpunk y de ciencia ficción, caracterizada por una paleta de tonos oscuros en contraste con efectos de iluminación neón.
+NeonTD es un proyecto de juego tipo Tower Defense creado en Unity. Está ambientado en un universo futurista con identidad visual de `Neon Defender`, fundamentada en una estética cyberpunk y de ciencia ficción, caracterizada por una paleta de tonos oscuros en contraste con efectos de iluminación neón.
 
 Incluye:
 
@@ -142,7 +142,7 @@ Incluye:
   - historial de partidas
   - guardado de datos de partida
 
-> Nota: Se recomienda mantener la misma versión de Unity para evitar problemas de compatibilidad.
+> Nota: se recomienda mantener la misma versión de Unity para evitar problemas de compatibilidad.
 
 ## Ejecución
 
