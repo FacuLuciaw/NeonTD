@@ -66,14 +66,13 @@ public class AdministradorNivel : MonoBehaviour
         }
         else
         {
-            // NUEVO: Al quitar la pausa, le pedimos al Controlador que aplique la velocidad que tenía guardada
             if (controladorTiempo != null)
             {
                 controladorTiempo.ReaplicarVelocidadActual();
             }
             else
             {
-                Time.timeScale = 1f; // Respaldo de seguridad por si olvidas asignar la variable en Unity
+                Time.timeScale = 1f;
             }
 
             if (pantallaConfiguracion != null) pantallaConfiguracion.SetActive(false); 
@@ -154,13 +153,11 @@ public class AdministradorNivel : MonoBehaviour
         Time.timeScale = 0f; 
     }
 
-    // --- LA ÚNICA FUNCIÓN MODIFICADA ---
     public void IniciarModoInfinito()
     {
         juegoFinalizado = false; 
         enModoInfinito = true;
 
-        // BUSCAMOS TODOS LOS SPAWNERS DEL MAPA AUTOMÁTICAMENTE
         GeneradorEnemigos[] todosLosSpawners = FindObjectsByType<GeneradorEnemigos>(FindObjectsSortMode.None);
         foreach (GeneradorEnemigos spawner in todosLosSpawners)
         {
@@ -179,7 +176,6 @@ public class AdministradorNivel : MonoBehaviour
 
         Time.timeScale = 1f; 
     }
-    // ------------------------------------
 
     public void AbrirEstadisticas()
     {

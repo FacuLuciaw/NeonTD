@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class GestorPantallas : MonoBehaviour
 {
-    // --- NUEVA VARIABLE DE MEMORIA TEMPORAL ---
+    
 
     public static bool sesionActiva = false;
 
@@ -45,11 +45,7 @@ public class GestorPantallas : MonoBehaviour
 
     [Header("Configuración AWS")]
     public string apiURL = "https://pr3m2sbom5.execute-api.us-east-1.amazonaws.com/default/L_Unity_Login_towerdefens";
-    public string urlHistorial = "https://688mn3wjo2.execute-api.us-east-1.amazonaws.com/default/L_Unity_Historial_towerdefender"; // URL de la nueva Lambda de historial
-
-    // ==========================================
-    // NAVEGACIÓN BÁSICA
-    // ==========================================
+    public string urlHistorial = "https://688mn3wjo2.execute-api.us-east-1.amazonaws.com/default/L_Unity_Historial_towerdefender"; 
 
     public void IrARegistro()
     {
@@ -69,13 +65,13 @@ public class GestorPantallas : MonoBehaviour
         pantallaMenu.SetActive(true);
     }
 
-    // cada vez que abre el historial, se refresca con los datos más recientes de AWS
+    
     public void AbrirHistorial()
     {
         DesactivarTodasLasPantallas();
         pantallaHistorial.SetActive(true);
 
-        // Si tenemos un ID de usuario, pedimos el historial actualizado
+        
         if (GestorDatosPartida.instancia != null && GestorDatosPartida.instancia.datosPartida.id_user != 0)
         {
             int idActual = GestorDatosPartida.instancia.datosPartida.id_user;
@@ -119,40 +115,32 @@ public class GestorPantallas : MonoBehaviour
         if (pantallaConfiguracion != null) pantallaConfiguracion.SetActive(false);
     }
 
-    // ==========================================
-    // INICIO DEL JUEGO
-    // ==========================================
-
     void Start()
     {
 
         if (panelError != null) panelError.SetActive(false);
 
-        // 1. Comprueba si venimos de jugar un nivel                                            
+        
         if (PlayerPrefs.GetInt("AbrirCarrusel", 0) == 1)
         {
             PlayerPrefs.SetInt("AbrirCarrusel", 0);
             DesactivarTodasLasPantallas();
             pantallaSeleccionMapa.SetActive(true);
         }
-        // 2. Comprueba la memoria RAM (Variable estática)                                                 
+        
         else if (sesionActiva == true)
         {
             Debug.Log("✓ Sesión activa en memoria RAM. Saltando al Menú Principal.");
             DesactivarTodasLasPantallas();
             pantallaMenu.SetActive(true);
         }
-        // 3. Si abrimos el juego por primera vez, la variable será false                                                                 
+        
         else
         {
             DesactivarTodasLasPantallas();
             pantallaInicioSesion.SetActive(true);
         }
     }
-
-    // ==========================================
-    // LÓGICA DE BOTONES Y CONEXIÓN
-    // ==========================================
 
     public void ClickLoginrapido()
     {
@@ -170,7 +158,7 @@ public class GestorPantallas : MonoBehaviour
         if (string.IsNullOrEmpty(userLogin.text) || string.IsNullOrEmpty(passLogin.text))
         {
             Debug.LogWarning("Por favor, rellena todos los campos.");
-            MostrarError(GestorIdiomas.ObtenerErrorCamposVacios()); // MODIFICADO
+            MostrarError(GestorIdiomas.ObtenerErrorCamposVacios()); 
             return;
         }
 
@@ -179,7 +167,7 @@ public class GestorPantallas : MonoBehaviour
 
     public void ClickRegistro()
     {
-        // MODIFICADO: Añadida la comprobación de campos vacíos al registrar
+        
         if (string.IsNullOrEmpty(userRegister.text) || string.IsNullOrEmpty(passRegister.text))
         {
             Debug.LogWarning("Por favor, rellena todos los campos.");
@@ -189,12 +177,7 @@ public class GestorPantallas : MonoBehaviour
 
         StartCoroutine(EnviarPeticion("registro", userRegister.text, passRegister.text));
     }
-
-    // ==========================================
-    // FUNCIONES DEL AVISO DE ERROR (MULTIUSOS)
-    // ==========================================
     
-    // MODIFICADO: Ahora recibe el texto exacto que debe mostrar
     public void MostrarError(string mensajeTraducido)
     {
         if (panelError != null) panelError.SetActive(true);
@@ -204,32 +187,28 @@ public class GestorPantallas : MonoBehaviour
             txtMensajeError.text = mensajeTraducido;
         }
 
-        // Si ya hay una cuenta atrás en marcha, la detenemos para empezar de cero
+        
         if (rutinaErrorActiva != null)
         {
             StopCoroutine(rutinaErrorActiva);
         }
         
-        // Iniciamos el temporizador
+        
         rutinaErrorActiva = StartCoroutine(OcultarErrorAutomatico());
     }
 
     private System.Collections.IEnumerator OcultarErrorAutomatico()
     {
-        // Esperamos los segundos configurados
+        
         yield return new WaitForSeconds(tiempoAvisoError);
 
-        // Apagamos el panel
+        
         if (panelError != null)
         {
             panelError.SetActive(false);
         }
     }
-
-    // ==========================================
-    // CORRUTINAS DE RED (AWS)
-    // ==========================================
-
+    
     IEnumerator EnviarPeticion(string accion, string user, string pass)
     {
         AuthRequest datos = new AuthRequest
@@ -253,7 +232,7 @@ public class GestorPantallas : MonoBehaviour
             if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
             {
                 Debug.LogError("Error de Red/DNS: " + request.error);
-                // MODIFICADO: Decide qué error mostrar según la acción
+                
                 if (accion == "registro") MostrarError(GestorIdiomas.ObtenerErrorRegistro());
                 else MostrarError(GestorIdiomas.ObtenerErrorLogin());
             }
@@ -264,7 +243,7 @@ public class GestorPantallas : MonoBehaviour
                     if (accion == "registro") IrAInicioSesion();
                     else
                     {
-                        // Encendemos la variable en la RAM tras loguearnos con éxito                                                             
+                        
                         sesionActiva = true;
 
                         if (GestorDatosPartida.instancia != null)
@@ -282,9 +261,9 @@ public class GestorPantallas : MonoBehaviour
                 }
                 else
                 {
-                    // Si AWS nos devuelve un 401, 404, etc (contraseña mal, usuario no existe)
+                    
                     Debug.LogWarning("Respuesta del servidor no válida (Ej. Contraseña incorrecta)");
-                    // MODIFICADO: Decide qué error mostrar según la acción
+                    
                     if (accion == "registro") MostrarError(GestorIdiomas.ObtenerErrorRegistro());
                     else MostrarError(GestorIdiomas.ObtenerErrorLogin());
                 }
@@ -292,10 +271,9 @@ public class GestorPantallas : MonoBehaviour
         }
     }
 
-    // CORRUTINA: Para refrescar el historial en tiempo real sin re-loguear
     IEnumerator ObtenerHistorialActualizado(int idUsuario)
     {
-        // Creamos un objeto simple para enviar el id_user a la nueva Lambda
+        
         string json = "{\"id_user\":" + idUsuario + "}";
 
         using (UnityWebRequest request = new UnityWebRequest(urlHistorial, "POST"))
@@ -317,10 +295,6 @@ public class GestorPantallas : MonoBehaviour
             }
         }
     }
-
-    // ==========================================
-    // CLASES DE ESTRUCTURA DE DATOS
-    // ==========================================
 
     [System.Serializable]
     public class AuthRequest
@@ -349,10 +323,6 @@ public class GestorPantallas : MonoBehaviour
         public int id_user;
         public List<PartidaData> partidas;
     }
-
-    // ==========================================
-    // LÓGICA DE HISTORIAL (TARJETAS)
-    // ==========================================
 
     private void ActualizarHistorialReal(string json)
     {
